@@ -33,7 +33,7 @@ const Nav = styled.nav`
 
 const Wrapper = styled.div`
   background-color: white;
-  height: 100px;
+  height: 50px;
   margin-top: 0;
   padding: 0;
   display: flex;

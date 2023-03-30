@@ -19,16 +19,16 @@ const NavLink = styled(Link)`
   background-color: #c83349;
   color: white;
   border-radius: 10px;
+  padding: 4px;
   margin-right: 20px;
-  padding: 5px;
   &:hover {
     filter: brightness(85%);
   }
 `;
 
 const Nav = styled.nav`
-  margin-top: 0;
-  font-size: 25px;
+  margin-top: 5px;
+  font-size: 20px;
 `;
 
 const Wrapper = styled.div`

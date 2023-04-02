@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import Footer from "./Footer";
 import LogInButton from "./LogInButton";
-import Profile from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 import React from "react";
 const Homepage = () => {
-  const { loginWithRedirect } = useAuth0();
-
+  const navigate = useNavigate();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  {
+    if (isAuthenticated) {
+      navigate("/profile");
+    }
+  }
   return (
     <>
       <Container>
@@ -33,9 +38,7 @@ const Homepage = () => {
     </>
   );
 };
-// const Button = styled.button`
-//   z-index: 1000;
-// `;
+
 const BorderBottom = styled.span`
   &:hover {
     background-color: red;

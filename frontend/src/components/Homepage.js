@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Footer from "./Footer";
 import LogInButton from "./LogInButton";
+import Profile from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import React from "react";
-// span not working for now
 const Homepage = () => {
   const { loginWithRedirect } = useAuth0();
 

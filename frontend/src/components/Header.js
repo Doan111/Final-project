@@ -2,17 +2,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
-
+import { useAuth0 } from "@auth0/auth0-react";
 const Header = () => {
+  const { isAuthenticated } = useAuth0();
   return (
     <div>
       <Wrapper>
         <Title>Burn</Title>
         <Nav>
           <NavLink>
-            {" "}
-            <LogInButton />
-            <LogOutButton />{" "}
+            {!isAuthenticated ? <LogInButton /> : <LogOutButton />}
           </NavLink>
         </Nav>
       </Wrapper>

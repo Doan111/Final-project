@@ -15,6 +15,17 @@ const LogOutButton = () => {
   );
 };
 const Wrapper = styled.div``;
-const LogOut = styled.button``;
+const LogOut = styled.button`
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
+  &:hover {
+    filter: brightness(85%);
+  }
+`;
 
 export default LogOutButton;

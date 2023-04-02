@@ -2,6 +2,13 @@
 const express = require("express");
 const morgan = require("morgan");
 
+const {
+  getActivities,
+  getActivity,
+  getSingleUser,
+  getUsers,
+} = require("./handlers");
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -9,6 +16,14 @@ express()
   // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
   .use(morgan("tiny"))
   .use(express.json())
+
+  // routes for activities
+  .get("/api/get-activities", getActivities)
+  .get("/api/get-activity/:activity", getActivity)
+
+  // routes for users
+  .get("/api/users", getUsers)
+  .get(`/api/user/:userId`, getSingleUser)
 
   .get("*", (req, res) => {
     res.status(404).json({

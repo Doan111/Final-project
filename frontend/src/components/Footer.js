@@ -7,7 +7,10 @@ const Footer = () => {
       <Foot>
         <DivCopyright>
           <FooterInfo>Burn</FooterInfo>
-          <Copyright> &copy; {new Date().getFullYear()}All rights reserved</Copyright>
+          <Copyright>
+            {" "}
+            &copy; {new Date().getFullYear()}All rights reserved
+          </Copyright>
         </DivCopyright>
         <FooterInfo>About us</FooterInfo>
         <DivContact>
@@ -25,12 +28,13 @@ const Copyright = styled.div`
   top: -370px;
   color: grey;
   font-size: 15px;
-  margin-left:10px;
+  margin-left: 10px;
 `;
 const DivCopyright = styled.div``;
 const ContactInfo = styled(Link)`
   position: relative;
   top: -400px;
+  left: 10px;
   margin: 50px 10px 0px 0px;
   color: grey;
   font-size: 15px;
@@ -51,6 +55,9 @@ const Foot = styled.footer`
   margin-top: 0;
   height: auto;
 `;
-const FooterWrapper = styled.div``;
+const FooterWrapper = styled.div`
+  position: relative;
+  top: 200px;
+`;
 
 export default Footer;

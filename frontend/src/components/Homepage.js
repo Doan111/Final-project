@@ -1,38 +1,44 @@
 import styled from "styled-components";
 import Footer from "./Footer";
+import LogInButton from "./LogInButton";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import React from "react";
 // span not working for now
 const Homepage = () => {
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <>
-    <Container>
-      <Wrapper>
-        <Information>
-          <Text1>Train,Track and Share your workouts with a single platform</Text1>
-          <Text2>
-            "Fuel your fire with Burn - a community-driven platform where
-            physical activity becomes a collective achievement, and motivation
-            is the oxygen that keeps the flames burning."
-          </Text2>
-          <Text3>
-            Already a member? <BorderBottom>Log in</BorderBottom>
-          </Text3>
-          <Text3>
-            
-            If not, click here to <BorderBottom>sign up!</BorderBottom>
-          </Text3>
-        </Information>
-      </Wrapper>
-    </Container>
-    <Footer/>
+      <Container>
+        <Wrapper>
+          <Information>
+            <Text1>
+              Train,Track and Share your workouts with a single platform
+            </Text1>
+            <Text2>
+              "Fuel your fire with Burn - a community-driven platform where
+              physical activity becomes a collective achievement, and motivation
+              is the oxygen that keeps the flames burning."
+            </Text2>
+            <Text3>Already a member?</Text3>
+            <LogInButton />
+            <Text3>
+              If not, click here to <BorderBottom>sign up!</BorderBottom>
+            </Text3>
+          </Information>
+        </Wrapper>
+      </Container>
+      <Footer />
     </>
   );
 };
-
-
-
+// const Button = styled.button`
+//   z-index: 1000;
+// `;
 const BorderBottom = styled.span`
   &:hover {
-    background-color:red;
+    background-color: red;
   }
 `;
 const Text3 = styled.p`
@@ -79,8 +85,8 @@ const Container = styled.div`
   width: 100%;
   margin-top: 0;
   position: relative;
-  top: -200px;
-  z-index: -1000;
+  top: 100px;
+  /* z-index: -50; */
 `;
 
 export default Homepage;

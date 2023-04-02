@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LogInButton from "./LogInButton";
+import LogOutButton from "./LogOutButton";
 
 const Header = () => {
   return (
@@ -7,24 +9,18 @@ const Header = () => {
       <Wrapper>
         <Title>Burn</Title>
         <Nav>
-          <NavLink to="/signup">Log in</NavLink>
+          <NavLink>
+            {" "}
+            <LogInButton />
+            <LogOutButton />{" "}
+          </NavLink>
         </Nav>
       </Wrapper>
     </div>
   );
 };
 
-const NavLink = styled(Link)`
-  text-decoration: none;
-  background-color: #c83349;
-  color: white;
-  border-radius: 10px;
-  padding: 4px;
-  margin-right: 20px;
-  &:hover {
-    filter: brightness(85%);
-  }
-`;
+const NavLink = styled(Link)``;
 
 const Nav = styled.nav`
   margin-top: 5px;
@@ -32,6 +28,7 @@ const Nav = styled.nav`
 `;
 
 const Wrapper = styled.div`
+  z-index: 10;
   background-color: white;
   height: 50px;
   margin-top: 0;

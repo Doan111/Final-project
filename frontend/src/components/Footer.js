@@ -57,7 +57,8 @@ const Foot = styled.footer`
 `;
 const FooterWrapper = styled.div`
   position: relative;
-  top: 200px;
+  top: 0px;
+  background-color: lightgray;
 `;
 
 export default Footer;

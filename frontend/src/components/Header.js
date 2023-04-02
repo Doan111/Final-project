@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FiPlusCircle } from "react-icons/fi";
 const Header = () => {
   const { isAuthenticated } = useAuth0();
   return (
@@ -11,15 +12,28 @@ const Header = () => {
         <Title>Burn</Title>
         <Nav>
           <NavLink>
-            {!isAuthenticated ? <LogInButton /> : <LogOutButton />}
+            {!isAuthenticated ? (
+              <LogInButton />
+            ) : (
+              <>
+                <Icon><FiPlusCircle /></Icon> <LogOutButton />
+              </>
+            )}
           </NavLink>
         </Nav>
       </Wrapper>
     </div>
   );
 };
-
-const NavLink = styled(Link)``;
+const Icon = styled.div`
+  margin:5px 25px 0px 0px;
+  padding-right:5px;
+  &:hover{
+    border-right:1px solid black
+  }
+`;
+const NavLink = styled(Link)`
+display:flex;`;
 
 const Nav = styled.nav`
   margin-top: 5px;
@@ -28,8 +42,8 @@ const Nav = styled.nav`
 
 const Wrapper = styled.div`
   z-index: 10;
-  background-color: white;
-  height: 50px;
+  background-color: lightgrey;
+  height: 75px;
   margin-top: 0;
   padding: 0;
   display: flex;

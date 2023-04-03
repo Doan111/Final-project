@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const UploadActivity = () => {
-  const [formData, setFormData] = useState({unit:"kilometers"});
+  const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
   const [duration, setDuration] = useState([
     { id: "duration-hours", name: "hr" },
@@ -40,11 +40,13 @@ const UploadActivity = () => {
       </InputContainer>
 
       <InputContainer>
-        <Label htmlFor="duration">Duration(hours/minutes/seconds) </Label>
+        <LabelDuration htmlFor="duration">
+          Duration(hours/minutes/seconds){" "}
+        </LabelDuration>
 
         {duration.map((unit) => {
           return (
-            <Input
+            <InputDate
               placeholder={unit.name}
               key={unit.id}
               type="text"
@@ -63,7 +65,7 @@ const UploadActivity = () => {
         </select>
       </InputContainer>
       <InputContainer>
-        <Label htmlFor="date">Date and time </Label>
+        <Label htmlFor="date">Date and time: </Label>
 
         <Input
           name="date"
@@ -80,23 +82,23 @@ const UploadActivity = () => {
       </InputContainer>
       <InputContainer>
         <Label htmlfor="title">Title</Label>
-        <Input
-          type="text"
-          id="title"
-          name="title"
-          onChange={(e) => handleChange(e.target.id, e.target.value)}
-        />
       </InputContainer>
+      <InputTitle
+        type="text"
+        id="title"
+        name="title"
+        onChange={(e) => handleChange(e.target.id, e.target.value)}
+      />
 
       <InputContainer>
         <Label htmlfor="description">Description</Label>
-        <TextArea
-          placeholder="How did your workout go?"
-          id="description"
-          name="description"
-          onChange={(e) => handleChange(e.target.id, e.target.value)}
-        ></TextArea>
       </InputContainer>
+      <TextArea
+        placeholder="How did your workout go?"
+        id="description"
+        name="description"
+        onChange={(e) => handleChange(e.target.id, e.target.value)}
+      ></TextArea>
       <Create
         onClick={() => {
           console.log(formData);
@@ -107,20 +109,48 @@ const UploadActivity = () => {
     </Form>
   );
 };
-const Create = styled.button``;
+const Create = styled.button`
+    position:relative;
+    right:430px;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
+  &:hover {
+    filter: brightness(85%);
+  }
+`;
 const TextArea = styled.textarea`
   height: 200px;
-  width: 200px;
+  width: 470px;
+  margin-bottom: 50px;
+  position: relative;
+  left: 40px;
 `;
 
-const Title = styled.div``;
-const Label = styled.label`
+const Title = styled.div`
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 50px;
+`;
+const LabelDuration = styled.label`
+  margin-right: 50px;
   font-size: 20px;
   color: black;
 `;
 
+const Label = styled.label`
+  font-size: 20px;
+  color: black;
+`;
+const InputDate = styled.input`
+  width: 100px;
+`;
 const InputContainer = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   width: 500px;
   margin: 0 auto;
   display: flex;
@@ -133,13 +163,20 @@ const Input = styled.input`
   }
 `;
 
+const InputTitle = styled.input`
+  width: 475px;
+  height: 20px;
+`;
+
 const Form = styled.div`
-  border: 4px solid black;
-  width: 700px;
-  height: 500px;
+  width: 900px;
+  height: 600px;
   text-align: center;
   margin: 0 auto;
   padding-top: 30px;
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin-top: 20px;
 `;
 
 export default UploadActivity;

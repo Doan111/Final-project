@@ -18,7 +18,7 @@ const Header = () => {
               <>
                 <ProfilePic src={user.picture} alt={user.name} />{" "}
                 <Icon>
-                  <FiPlusCircle />
+                  <FiPlusCircle style={{ fontSize: '34px' }}/>
                 </Icon>{" "}
                 <LogOutButton />
               </>

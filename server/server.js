@@ -7,6 +7,7 @@ const {
   getActivity,
   getSingleUser,
   getUsers,
+  addActivity,
 } = require("./handlers");
 
 express()
@@ -20,6 +21,7 @@ express()
   // routes for activities
   .get("/api/get-activities", getActivities)
   .get("/api/get-activity/:activity", getActivity)
+  .post("/api/add-activity",addActivity)
 
   // routes for users
   .get("/api/users", getUsers)

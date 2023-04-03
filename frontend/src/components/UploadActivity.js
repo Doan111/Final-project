@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
+
 import Error from "./Error";
 const UploadActivity = () => {
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
@@ -19,10 +22,24 @@ const UploadActivity = () => {
       [key]: value,
     });
   };
+
+  const handleSubmit = () => {
+    console.log("the form was submitted");
+    fetch("/api/add-activity", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    navigate("/profile");
+  };
+
   return (
     <>
       {isAuthenticated ? (
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Title>Log an activity</Title>
           <InputContainer>
             <Label htmlFor="distance">Distance </Label>
@@ -64,7 +81,11 @@ const UploadActivity = () => {
           </InputContainer>
           <InputContainer>
             <Label htmlFor="sport">Sport </Label>
-            <select name="sport" id="sport">
+            <select
+              name="sport"
+              id="sport"
+              onChange={(e) => handleChange(e.target.id, e.target.value)}
+            >
               {sport.map((sport) => {
                 return <option key={sport}>{sport}</option>;
               })}
@@ -105,13 +126,7 @@ const UploadActivity = () => {
             name="description"
             onChange={(e) => handleChange(e.target.id, e.target.value)}
           ></TextArea>
-          <Create
-            onClick={() => {
-              console.log(formData);
-            }}
-          >
-            Create{" "}
-          </Create>
+          <Create>Create </Create>
         </Form>
       ) : (
         <Error />
@@ -178,7 +193,7 @@ const InputTitle = styled.input`
   height: 20px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   width: 900px;
   height: 600px;
   text-align: center;

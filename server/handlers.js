@@ -7,6 +7,8 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+// generate unique id
+const { v4: uuidv4 } = require("uuid");
 
 // authentification handlers
 
@@ -102,9 +104,21 @@ const getActivity = async (request, response) => {
   }
 };
 
+// post an activity
+const addActivity = async (request, response) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  const _id = uuidv4();
+  // try{
+  //   await client.connect();
+  //   const db = client.db("Finalproject");
+  // }
+};
+
 module.exports = {
   getActivities,
   getActivity,
+  addActivity,
   getSingleUser,
   getUsers,
 };

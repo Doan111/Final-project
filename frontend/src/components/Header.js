@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLinkClickHandler } from "react-router-dom";
 import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiLinkedin, FiPlusCircle } from "react-icons/fi";
+
 const Header = () => {
   const { user, isAuthenticated } = useAuth0();
   return (
     <div>
       <Wrapper>
-        <Title>Burn</Title>
+        <Title to="/profile">Burn</Title>
         <Nav>
           <NavLink>
             {!isAuthenticated ? (
@@ -17,8 +18,9 @@ const Header = () => {
             ) : (
               <>
                 <ProfilePic src={user.picture} alt={user.name} />{" "}
-                <Icon>
-                  <FiPlusCircle style={{ fontSize: '34px' }}/>
+                <Icon to="/activity">
+                  <FiPlusCircle style={{ fontSize: "34px" }} />
+                  <Upload>Upload an activity</Upload>
                 </Icon>{" "}
                 <LogOutButton />
               </>
@@ -30,20 +32,35 @@ const Header = () => {
   );
 };
 
+const Upload = styled.span`
+  border: 1px solid black;
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: -20px;
+  width: 120px;
+  padding: 8px;
+  font-size: 14px;
+  color: #c83349;
+  background-color: lightgray;
+  border-radius: 4px;
+`;
 const ProfilePic = styled.img`
   border-radius: 50%;
   height: 40px;
   margin-right: 25px;
 `;
 
-const Icon = styled.div`
+const Icon = styled(Link)`
+  position: relative;
   margin: 5px 25px 0px 0px;
   padding-right: 5px;
-  &:hover {
-    border-right: 1px solid black;
+
+  &:hover span {
+    display: block;
   }
 `;
-const NavLink = styled(Link)`
+const NavLink = styled.div`
   display: flex;
 `;
 
@@ -61,7 +78,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const Title = styled.p`
+const Title = styled(Link)`
+  text-decoration: none;
   font-size: 35px;
   @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
   font-family: "Oswald", sans-serif;

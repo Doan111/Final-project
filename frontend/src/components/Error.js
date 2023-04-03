@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Error = () => {
-  return <>This page cannot be found</>;
+  return <>This page cannot be found, please log in</>;
 };
 
 export default Error;

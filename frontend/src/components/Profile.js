@@ -5,23 +5,23 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
   return (
-    <Wrapper>
-      <InfoContainer>
-        {isAuthenticated ? (
-          <>
+    <>
+      {isAuthenticated ? (
+        <Wrapper>
+          <InfoContainer>
             <Image src={user.picture} alt={user.name} />
             <Name> {user.nickname}</Name>
-          </>
-        ) : (
-          <Error />
-        )}
-      </InfoContainer>
-    </Wrapper>
+          </InfoContainer>
+        </Wrapper>
+      ) : (
+        <Error />
+      )}
+    </>
   );
 };
 
 const InfoContainer = styled.div`
-    margin-top:50px;
+  margin-top: 50px;
   border: solid 2px black;
   width: 400px;
   height: 400px;
@@ -36,12 +36,12 @@ const InfoContainer = styled.div`
 `;
 
 const Name = styled.div`
-font-size:20px;
-font-weight:bold;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 const Image = styled.img`
-border-radius: 50%;
+  border-radius: 50%;
 `;
 const Wrapper = styled.div``;
 

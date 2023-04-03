@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Homepage from "./Homepage";
 import Header from "./Header";
 import Profile from "./Profile";
+import UploadActivity from "./UploadActivity";
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/activity" element = {<UploadActivity/>}/>
         </Routes>
       </BrowserRouter>
     </>

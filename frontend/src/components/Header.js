@@ -5,7 +5,7 @@ import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FiPlusCircle } from "react-icons/fi";
 const Header = () => {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div>
       <Wrapper>
@@ -16,7 +16,11 @@ const Header = () => {
               <LogInButton />
             ) : (
               <>
-                <Icon><FiPlusCircle /></Icon> <LogOutButton />
+                <ProfilePic src={user.picture} alt={user.name} />{" "}
+                <Icon>
+                  <FiPlusCircle />
+                </Icon>{" "}
+                <LogOutButton />
               </>
             )}
           </NavLink>
@@ -25,15 +29,23 @@ const Header = () => {
     </div>
   );
 };
+
+const ProfilePic = styled.img`
+  border-radius: 50%;
+  height: 40px;
+  margin-right: 25px;
+`;
+
 const Icon = styled.div`
-  margin:5px 25px 0px 0px;
-  padding-right:5px;
-  &:hover{
-    border-right:1px solid black
+  margin: 5px 25px 0px 0px;
+  padding-right: 5px;
+  &:hover {
+    border-right: 1px solid black;
   }
 `;
 const NavLink = styled(Link)`
-display:flex;`;
+  display: flex;
+`;
 
 const Nav = styled.nav`
   margin-top: 5px;

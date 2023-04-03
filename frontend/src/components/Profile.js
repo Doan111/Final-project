@@ -21,6 +21,7 @@ const Profile = () => {
 };
 
 const InfoContainer = styled.div`
+    margin-top:50px;
   border: solid 2px black;
   width: 400px;
   height: 400px;

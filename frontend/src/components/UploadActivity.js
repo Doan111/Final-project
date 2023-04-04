@@ -10,9 +10,9 @@ const UploadActivity = () => {
   const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
   const [duration, setDuration] = useState([
-    { id: "duration-hours", name: "hr" },
-    { id: "duration-minutes", name: "min" },
-    { id: "duration-seconds", name: "s" },
+    // { id: "duration-hours", name: "hr" },
+    // { id: "duration-minutes", name: "min" },
+    // { id: "duration-seconds", name: "s" },
   ]);
   const [sport, setSport] = useState(["run", "swim", "bike"]);
 
@@ -35,6 +35,7 @@ const UploadActivity = () => {
     navigate("/profile");
   };
 
+  // .thens and change navigate
   return (
     <>
       {isAuthenticated ? (
@@ -64,19 +65,29 @@ const UploadActivity = () => {
             <LabelDuration htmlFor="duration">
               Duration(hours/minutes/seconds){" "}
             </LabelDuration>
+            <InputDate
+              min="0"
+              placeholder="hour"
+              type="number"
+              id="distanceHour"
+              onChange={(e) => handleChange(e.target.id, e.target.value)}
+            />
 
-            {duration.map((unit) => {
-              return (
-                <InputDate
-                  min="0"
-                  placeholder={unit.name}
-                  key={unit.id}
-                  type="number"
-                  id={unit.id}
-                  onChange={(e) => handleChange(e.target.id, e.target.value)}
-                />
-              );
-            })}
+            <InputDate
+              min="0"
+              placeholder="minutes"
+              type="number"
+              id="distanceMinute"
+              onChange={(e) => handleChange(e.target.id, e.target.value)}
+            />
+
+            <InputDate
+              min="0"
+              placeholder="seconds"
+              type="number"
+              id="distanceSecond"
+              onChange={(e) => handleChange(e.target.id, e.target.value)}
+            />
           </InputContainer>
           <InputContainer>
             <Label htmlFor="sport">Sport </Label>
@@ -125,7 +136,13 @@ const UploadActivity = () => {
             name="description"
             onChange={(e) => handleChange(e.target.id, e.target.value)}
           ></TextArea>
-          <Create>Create </Create>
+          <Create
+            onClick={() => {
+              console.log(formData);
+            }}
+          >
+            Create{" "}
+          </Create>
         </Form>
       ) : (
         <Error />

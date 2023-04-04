@@ -106,13 +106,30 @@ const getActivity = async (request, response) => {
 
 // post an activity
 const addActivity = async (request, response) => {
+  
   const client = new MongoClient(MONGO_URI, options);
-
+  const {unit,distance,date,time,title,description}=request.body
   const _id = uuidv4();
-  // try{
-  //   await client.connect();
-  //   const db = client.db("Finalproject");
-  // }
+  try {
+    await client.connect();
+    const db = client.db("Finalproject");
+
+    const result = await db.collection("Activities").insertOne({});
+    if (result) {
+      return response.status(200).json({
+        status: 200,
+        message: "The reservation was succesfully added",
+      });
+    } else {
+      return response
+        .status(400)
+        .json({ status: 400, message: "Failure in adding an activity" });
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
+    client.close();
+  }
 };
 
 module.exports = {

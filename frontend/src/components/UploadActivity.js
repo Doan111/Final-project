@@ -24,7 +24,6 @@ const UploadActivity = () => {
   };
 
   const handleSubmit = () => {
-    console.log("the form was submitted");
     fetch("/api/add-activity", {
       method: "POST",
       body: JSON.stringify(formData),

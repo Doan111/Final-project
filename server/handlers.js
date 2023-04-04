@@ -115,7 +115,8 @@ const addActivity = async (request, response) => {
 
     const result = await db
       .collection("Activities")
-      .insertOne(_id, request.body);
+      .insertOne({ _id, ...request.body });
+    console.log(result);
     if (result) {
       return response.status(200).json({
         status: 200,

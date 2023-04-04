@@ -26,16 +26,23 @@ const UploadActivity = () => {
   const handleSubmit = () => {
     fetch("/api/add-activity", {
       method: "POST",
-      body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    });
-    navigate("/profile");
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        navigate("/profile");
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   };
 
-  // .thens and change navigate
+ 
   return (
     <>
       {isAuthenticated ? (
@@ -116,6 +123,17 @@ const UploadActivity = () => {
               id="time"
               onChange={(e) => handleChange(e.target.id, e.target.value)}
             />
+          </InputContainer>
+          <InputContainer>
+            <Label htmlfor="title"> Energy level during the workout</Label>
+            <Input
+              type="range"
+              id="energy"
+              name="energy"
+              min="1"
+              max="10"
+              onChange={(e) => handleChange(e.target.id, e.target.value)}
+            ></Input>
           </InputContainer>
           <InputContainer>
             <Label htmlfor="title">Title</Label>

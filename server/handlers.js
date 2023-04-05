@@ -160,6 +160,41 @@ const deleteActivity = async (request, response) => {
   }
 };
 
+// update and activity
+const updateActivity = async (request, response) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("Finalproject");
+    const result = await db.collection("Activities").findOneAndUpdate(
+      {
+        _id: request.body._id,
+      },
+      {
+        $set: {
+          ...request.body,
+        },
+      },
+      { rawResult: true }
+    );
+    console.log(result);
+    if (!result.ok) {
+      return response
+        .status(404)
+        .json({ status: 404, message: "Reservation not found" });
+    } else {
+      return response.status(200).json({
+        status: 200,
+        message: "The activity has been successfuly updated",
+      });
+    }
+  } catch (error) {
+    console.log(error.stack);
+  } finally {
+    client.close();
+  }
+};
+
 module.exports = {
   getActivities,
   getActivity,
@@ -167,4 +202,5 @@ module.exports = {
   getSingleUser,
   getUsers,
   deleteActivity,
+  updateActivity,
 };

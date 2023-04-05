@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Error from "./Error";
 
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
+  
   return (
     <>
       {isAuthenticated ? (

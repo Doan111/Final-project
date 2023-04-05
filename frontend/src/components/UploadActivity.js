@@ -9,11 +9,7 @@ const UploadActivity = () => {
   const { user, isAuthenticated } = useAuth0();
   const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
-  const [duration, setDuration] = useState([
-    // { id: "duration-hours", name: "hr" },
-    // { id: "duration-minutes", name: "min" },
-    // { id: "duration-seconds", name: "s" },
-  ]);
+  const [duration, setDuration] = useState([]);
   const [sport, setSport] = useState(["run", "swim", "bike"]);
 
   const handleChange = (key, value) => {
@@ -23,7 +19,15 @@ const UploadActivity = () => {
     });
   };
 
+  const addUserId = () => {
+    setFormData({
+      ...formData,
+      userId: "123",
+    });
+  };
+
   const handleSubmit = () => {
+    addUserId();
     fetch("/api/add-activity", {
       method: "POST",
       headers: {

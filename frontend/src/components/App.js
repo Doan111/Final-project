@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/activity" element = {<UploadActivity/>}/>
+          <Route path="/activity" element={<UploadActivity />} />
         </Routes>
       </BrowserRouter>
     </>

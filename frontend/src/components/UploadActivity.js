@@ -22,7 +22,7 @@ const UploadActivity = () => {
   const addUserId = () => {
     setFormData({
       ...formData,
-      userId: "123",
+      userId: "{user._id",
     });
   };
 

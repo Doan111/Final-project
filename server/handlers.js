@@ -135,10 +135,36 @@ const addActivity = async (request, response) => {
   }
 };
 
+// delete an activity
+const deleteActivity = async (request, response) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const activity = request.params.activity;
+  try {
+    await client.connect();
+    const db = client.db("Finalproject");
+    const result = await db
+      .collection("Activities")
+      .deleteOne({ _id: activity });
+    client.close();
+    if (!result.deletedCount) {
+      return response
+        .status(502)
+        .json({ status: 502, message: "Nothing was deleted" });
+    } else {
+      return response
+        .status(204)
+        .json({ status: 204, message: "The delete was successful" });
+    }
+  } catch (error) {
+    console.log(error.stack);
+  }
+};
+
 module.exports = {
   getActivities,
   getActivity,
   addActivity,
   getSingleUser,
   getUsers,
+  deleteActivity,
 };

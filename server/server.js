@@ -8,6 +8,7 @@ const {
   getSingleUser,
   getUsers,
   addActivity,
+  deleteActivity,
 } = require("./handlers");
 
 express()
@@ -22,6 +23,7 @@ express()
   .get("/api/get-activities", getActivities)
   .get("/api/get-activity/:activity", getActivity)
   .post("/api/add-activity", addActivity)
+  .delete("/api/delete-activity/:activity", deleteActivity)
 
   // routes for users
   .get("/api/users", getUsers)

@@ -10,6 +10,7 @@ const {
   addActivity,
   deleteActivity,
   updateActivity,
+  getActivitiesByUser,
 } = require("./handlers");
 
 express()
@@ -25,8 +26,8 @@ express()
   .get("/api/get-activity/:activity", getActivity)
   .post("/api/add-activity", addActivity)
   .delete("/api/delete-activity/:activity", deleteActivity)
-  // not working yet
   .patch("/api/update-activity", updateActivity)
+  .get("/api/get-activities/:email", getActivitiesByUser)
   // routes for users
   .get("/api/users", getUsers)
   .get(`/api/user/:userId`, getSingleUser)

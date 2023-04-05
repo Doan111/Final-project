@@ -195,15 +195,18 @@ const updateActivity = async (request, response) => {
     client.close();
   }
 };
-// add of user in my formData
+
 // get all activities from a specific user
 const getActivitiesByUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const Id = req.params.Id;
+  const email = req.params.email;
   try {
     await client.connect();
     const db = client.db("Finalproject");
-    const result = await db.collection("Activities").find().toArray();
+    const result = await db
+      .collection("Activities")
+      .find({ userEmail: email })
+      .toArray();
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
     console.log(err.stack);
@@ -221,4 +224,5 @@ module.exports = {
   getUsers,
   deleteActivity,
   updateActivity,
+  getActivitiesByUser,
 };

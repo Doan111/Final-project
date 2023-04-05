@@ -6,7 +6,7 @@ export const CurrentUserContext = createContext(null);
 export const CurrentUserProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
   const [activities, setActivities] = useState();
-
+  // all activities in the data base could be used for a homepage
   useEffect(() => {
     fetch("/api/get-activities")
       .then((res) => res.json())
@@ -17,6 +17,7 @@ export const CurrentUserProvider = ({ children }) => {
         console.log(error);
       });
   }, []);
+  // all activities for a single user that will be used for a profile page
 
   return (
     <CurrentUserContext.Provider

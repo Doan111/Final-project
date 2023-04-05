@@ -18,10 +18,10 @@ express()
   .use(morgan("tiny"))
   .use(express.json())
 
-  // routes for activities
+  // routes for activities(all working)
   .get("/api/get-activities", getActivities)
   .get("/api/get-activity/:activity", getActivity)
-  .post("/api/add-activity",addActivity)
+  .post("/api/add-activity", addActivity)
 
   // routes for users
   .get("/api/users", getUsers)

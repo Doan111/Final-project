@@ -42,7 +42,6 @@ const UploadActivity = () => {
       });
   };
 
- 
   return (
     <>
       {isAuthenticated ? (
@@ -76,7 +75,7 @@ const UploadActivity = () => {
               min="0"
               placeholder="hour"
               type="number"
-              id="distanceHour"
+              id="hour"
               onChange={(e) => handleChange(e.target.id, e.target.value)}
             />
 
@@ -84,7 +83,7 @@ const UploadActivity = () => {
               min="0"
               placeholder="minutes"
               type="number"
-              id="distanceMinute"
+              id="minute"
               onChange={(e) => handleChange(e.target.id, e.target.value)}
             />
 
@@ -92,7 +91,7 @@ const UploadActivity = () => {
               min="0"
               placeholder="seconds"
               type="number"
-              id="distanceSecond"
+              id="second"
               onChange={(e) => handleChange(e.target.id, e.target.value)}
             />
           </InputContainer>

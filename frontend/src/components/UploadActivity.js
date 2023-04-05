@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 import Error from "./Error";
 const UploadActivity = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useContext(CurrentUserContext);
   const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
   const [duration, setDuration] = useState([]);
@@ -18,23 +20,15 @@ const UploadActivity = () => {
       [key]: value,
     });
   };
-
-  const addUserId = () => {
-    setFormData({
-      ...formData,
-      userId: "{user._id",
-    });
-  };
-
+  // use userEmail
   const handleSubmit = () => {
-    addUserId();
     fetch("/api/add-activity", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...formData, userEmail: user.name }),
     })
       .then((response) => response.json())
       .then((data) => {

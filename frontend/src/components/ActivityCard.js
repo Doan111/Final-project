@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 const ActivityCard = ({ activity }) => {
   // const { user, isAuthenticated } = useAuth0();
 
-  console.log(activity);
   const { user, isAuthenticated } = useContext(CurrentUserContext);
   return (
     <>

@@ -8,9 +8,10 @@ const Profile = () => {
   return (
     <>
       <ProfileCard />
-      {activities.map((activity) => {
-        return <ActivityCard activity={activity}> </ActivityCard>;
-      })}
+      {activities &&
+        activities.map((activity) => {
+          return <ActivityCard activity={activity}> </ActivityCard>;
+        })}
     </>
   );
 };

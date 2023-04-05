@@ -5,7 +5,7 @@ export const CurrentUserContext = createContext(null);
 
 export const CurrentUserProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
-  const [activities, setActivities] = useState({});
+  const [activities, setActivities] = useState();
 
   useEffect(() => {
     fetch("/api/get-activities")

@@ -109,6 +109,7 @@ const addActivity = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   // const { unit, distance, date, time, title, description } = request.body;
   const _id = uuidv4();
+  console.log(request.body);
   try {
     await client.connect();
     const db = client.db("Finalproject");
@@ -198,7 +199,7 @@ const updateActivity = async (request, response) => {
 // get all activities from a specific user
 const getActivitiesByUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const Id = req.params.Id
+  const Id = req.params.Id;
   try {
     await client.connect();
     const db = client.db("Finalproject");

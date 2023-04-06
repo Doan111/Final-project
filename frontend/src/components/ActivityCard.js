@@ -3,9 +3,8 @@ import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+
 const ActivityCard = ({ activity }) => {
-  //   const { user, isAuthenticated } = useAuth0();
   const [isOpen, setIsOpen] = useState();
 
   const { user, isAuthenticated, deleted, setDeleted } =
@@ -70,6 +69,10 @@ const ActivityCard = ({ activity }) => {
                 </Time>
               )}
             </BottomInformation>
+            <DescriptionWrapper>
+              <DescriptionTitle>Activity description</DescriptionTitle>
+              <ActuelDescription>{activity.description}</ActuelDescription>
+            </DescriptionWrapper>
           </InfoContainer>
         </Wrapper>
       ) : (
@@ -78,6 +81,23 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+const DescriptionTitle = styled.div`
+  color: lightgray;
+  right: 85px;
+  position: relative;
+`;
+const DescriptionWrapper = styled.div`
+  position: relative;
+  top: -55px;
+  right: 0px;
+  border-bottom: 2px solid lightgrey;
+`;
+const ActuelDescription = styled.div`
+  margin: 0px 0px 5px 5px;
+
+  right: 85px;
+  position: relative;
+`;
 const ActuelTime = styled.div`
   position: relative;
   top: -15px;
@@ -94,6 +114,7 @@ const DistanceTitle = styled.div`
 const DistanceNumber = styled.div`
   margin-left: 25px;
 `;
+
 const Distance = styled.p``;
 const Title = styled.div`
   font-weight: bold;

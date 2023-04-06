@@ -6,13 +6,19 @@ import { useEffect, useState } from "react";
 // import { useAuth0 } from "@auth0/auth0-react";
 const ProfileCard = () => {
   // const { user, isAuthenticated } = useAuth0();
-  const { user, isAuthenticated } = useContext(CurrentUserContext);
+  const { user, isAuthenticated, specificActivities } =
+    useContext(CurrentUserContext);
 
   const [goalNum, setGoaNum] = useState(0);
+
+  console.log(specificActivities);
 
   const handleGoal = (event) => {
     setGoaNum(event.target.value);
   };
+  // verify with mohammed line 47 of profileCard
+  const actLeft = goalNum - specificActivities.length;
+
   const Number = 5;
   return (
     <>
@@ -37,7 +43,7 @@ const ProfileCard = () => {
               </Goal>
               <Sucess>
                 Activities left to hit your target goal:
-                <Bold> {goalNum} activities</Bold>
+                <Bold> {actLeft} activities</Bold>
               </Sucess>
             </Div>
             <Reset>Reset goal</Reset>

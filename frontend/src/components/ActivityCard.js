@@ -3,10 +3,12 @@ import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
+import { FaRunning, FaSwimmer, FaBiking, FaRegThumbsUp } from "react-icons/fa";
 
 const ActivityCard = ({ activity }) => {
   const [isOpen, setIsOpen] = useState();
-
+  const [like, setLikes] = useState(0);
+  const [hasBeenLiked, setHasBeenLiked] = useState(false);
   const { user, isAuthenticated, deleted, setDeleted } =
     useContext(CurrentUserContext);
 
@@ -20,6 +22,19 @@ const ActivityCard = ({ activity }) => {
         }
       });
   };
+
+  const handleClick = (event) => {
+    if (hasBeenLiked === false) {
+      event.stopPropagation();
+      setLikes(like + 1);
+      setHasBeenLiked(true);
+    } else {
+      event.stopPropagation();
+      setLikes(like - 1);
+      setHasBeenLiked(false);
+    }
+  };
+
   //   const handleUpdate = (id) => {
   //     fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
   //       .then((res) => res.json())
@@ -35,8 +50,6 @@ const ActivityCard = ({ activity }) => {
       {isAuthenticated ? (
         <Wrapper>
           <InfoContainer>
-            {/* <Div>{activity.distance} </Div> */}
-
             <TopInformation>
               <Image src={user.picture} alt={user.name} />
               <Name> {user.nickname}</Name>
@@ -48,7 +61,7 @@ const ActivityCard = ({ activity }) => {
                 handleDelete(activity._id);
               }}
             >
-              Delete
+              X
             </DeleteButton>
 
             <DeleteButton>Edit</DeleteButton>
@@ -73,7 +86,34 @@ const ActivityCard = ({ activity }) => {
               <DescriptionTitle>Activity description</DescriptionTitle>
               <ActuelDescription>{activity.description}</ActuelDescription>
             </DescriptionWrapper>
+            <IconContainer>
+              <Icon>
+                {" "}
+                {activity.sport === "bike" && (
+                  <FaBiking style={{ fontSize: "34px" }} />
+                )}
+              </Icon>
+              <Icon>
+                {activity.sport === "swim" && (
+                  <FaSwimmer style={{ fontSize: "34px" }} />
+                )}
+              </Icon>
+              <Icon>
+                {activity.sport === "run" && (
+                  <FaRunning style={{ fontSize: "34px" }} />
+                )}
+              </Icon>
+            </IconContainer>
           </InfoContainer>
+
+          <DivIconBottom>
+            <LikeWrapper onClick={handleClick}>
+              <LikeContainer hasBeenLiked={hasBeenLiked}>
+                <FaRegThumbsUp style={{ fill: hasBeenLiked ? "blue" : null, fontSize: "24px" }} />
+              </LikeContainer>
+              {like}
+            </LikeWrapper>
+          </DivIconBottom>
         </Wrapper>
       ) : (
         <Error />
@@ -81,6 +121,16 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+const LikeWrapper = styled.div``;
+const DivIconBottom = styled.div``;
+const LikeContainer = styled.div``;
+const Icon = styled.div`
+  position: relative;
+  right: 215px;
+  bottom: 180px;
+`;
+
+const IconContainer = styled.div``;
 const DescriptionTitle = styled.div`
   color: lightgray;
   right: 85px;
@@ -132,7 +182,10 @@ const Date = styled.div`
 const DeleteButton = styled.button`
   position: relative;
   top: -141px;
-  left: 252px;
+  left: 262px;
+  &:hover {
+    filter: brightness(85%);
+  }
 `;
 
 const TopInformation = styled.div`

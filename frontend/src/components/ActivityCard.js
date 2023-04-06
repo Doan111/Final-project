@@ -42,8 +42,8 @@ const ActivityCard = ({ activity }) => {
               <Image src={user.picture} alt={user.name} />
               <Name> {user.nickname}</Name>
             </TopInformation>
-            <Date>{activity.date}</Date>
-            <Title>{activity.title}</Title>
+            {activity.date && <Date>{activity.date}</Date>}
+            {activity.title && <Title>{activity.title}</Title>}
             <DeleteButton
               onClick={() => {
                 handleDelete(activity._id);
@@ -53,19 +53,23 @@ const ActivityCard = ({ activity }) => {
             </DeleteButton>
 
             <DeleteButton>Edit</DeleteButton>
-            <Div>
-              <Distance>
-                <Distance>Distance</Distance>
-                <DistanceNumber>
-                  {activity.distance}
-                  {activity.unit}
-                </DistanceNumber>
-              </Distance>
-              <Time>
-                <TimeTitle>Time</TimeTitle>
-                    <ActuelTime>{activity.time}</ActuelTime>
-              </Time>
-            </Div>
+            <BottomInformation>
+              {activity.distance && (
+                <Distance>
+                  <DistanceTitle>Distance</DistanceTitle>
+                  <DistanceNumber>
+                    {activity.distance}
+                    {activity.unit}
+                  </DistanceNumber>
+                </Distance>
+              )}
+              {activity.time && (
+                <Time>
+                  <TimeTitle>Time</TimeTitle>
+                  <ActuelTime>{activity.time}</ActuelTime>
+                </Time>
+              )}
+            </BottomInformation>
           </InfoContainer>
         </Wrapper>
       ) : (
@@ -75,14 +79,21 @@ const ActivityCard = ({ activity }) => {
   );
 };
 const ActuelTime = styled.div`
+  position: relative;
+  top: -15px;
 `;
 const TimeTitle = styled.p`
+  color: lightgray;
 `;
 const Time = styled.div`
-`
-
-
-const DistanceNumber = styled.div``;
+  margin-left: 20px;
+`;
+const DistanceTitle = styled.div`
+  color: lightgray;
+`;
+const DistanceNumber = styled.div`
+  margin-left: 25px;
+`;
 const Distance = styled.p``;
 const Title = styled.div`
   font-weight: bold;
@@ -97,14 +108,25 @@ const Date = styled.div`
   top: -40px;
 `;
 
-const DeleteButton = styled.button``;
+const DeleteButton = styled.button`
+  position: relative;
+  top: -141px;
+  left: 252px;
+`;
+
 const TopInformation = styled.div`
   display: flex;
   justify-content: start;
   margin-top: 10px;
 `;
 
-const Div = styled.div``;
+const BottomInformation = styled.div`
+  display: flex;
+  margin-left: 125px;
+  position: relative;
+  top: -55px;
+`;
+
 const InfoContainer = styled.div`
   margin-top: 50px;
   border: solid 2px black;

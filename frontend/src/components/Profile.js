@@ -4,12 +4,12 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import ActivityCard from "./ActivityCard";
 import { useContext } from "react";
 const Profile = () => {
-  const { activities } = useContext(CurrentUserContext);
+  const { activities, specificActivities } = useContext(CurrentUserContext);
   return (
     <>
       <ProfileCard />
-      {activities &&
-        activities.map((activity) => {
+      {specificActivities &&
+        specificActivities.map((activity) => {
           return <ActivityCard activity={activity}> </ActivityCard>;
         })}
     </>

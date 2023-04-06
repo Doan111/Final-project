@@ -6,17 +6,51 @@ import { useEffect, useState } from "react";
 // import { useAuth0 } from "@auth0/auth0-react";
 const ActivityCard = ({ activity }) => {
   // const { user, isAuthenticated } = useAuth0();
+  const [isOpen, setIsOpen] = useState(false);
+  const [activityId, setActivity]
 
-  const { user, isAuthenticated } = useContext(CurrentUserContext);
+  const { user, isAuthenticated, deleted, setDeleted } =
+    useContext(CurrentUserContext);
+
+  const handleDelete = (id) => {
+    fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 204) {
+          setDeleted(!deleted);
+          window.alert("Deleted!");
+        }
+      });
+  };
+  const handleUpdate = (id) => {
+    fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 204) {
+          setDeleted(!deleted);
+          window.alert("Deleted!");
+        }
+      });
+  };
   return (
     <>
       {isAuthenticated ? (
         <Wrapper>
           <InfoContainer>
-            <Div>{activity.energy} </Div>
+            <Div>{activity.distance} </Div>
+            <p>Energy {activity.energy}</p>
             <Image src={user.picture} alt={user.name} />
             <Name> {user.nickname}</Name>
           </InfoContainer>
+          <button
+            onClick={() => {
+              handleDelete(activity._id);
+            }}
+          >
+            Delete
+          </button>
+
+          <button>Edit</button>
         </Wrapper>
       ) : (
         <Error />

@@ -22,11 +22,17 @@ express()
   .use(express.json())
 
   // routes for activities(all working)
+  // get all activites from database
   .get("/api/get-activities", getActivities)
+  // get a single activity based on it's unique id
   .get("/api/get-activity/:activity", getActivity)
+  // add an activity
   .post("/api/add-activity", addActivity)
+  // delete an id based on its unique id
   .delete("/api/delete-activity/:activity", deleteActivity)
+  //update an activity
   .patch("/api/update-activity", updateActivity)
+  // get all activities from a single user
   .get("/api/get-activities/:email", getActivitiesByUser)
   // routes for users
   .get("/api/users", getUsers)

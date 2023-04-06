@@ -264,7 +264,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-left: 200px;
   position: relative;
-  top: -400px;
+  top: -640px;
 `;
 
 export default ActivityCard;

@@ -44,6 +44,12 @@ const ProfileCard = () => {
               <Sucess>
                 Activities left to hit your target goal:
                 <Bold> {actLeft} activities</Bold>
+                {actLeft === 0 && (
+                  <GoalComplete>
+                    Congratulation on reaching your goal! Please reset and set a
+                    new goal.
+                  </GoalComplete>
+                )}
               </Sucess>
             </Div>
             <Reset>Reset goal</Reset>
@@ -55,6 +61,12 @@ const ProfileCard = () => {
     </>
   );
 };
+const GoalComplete = styled.div`
+  margin-top: 5px;
+  border: 2px solid black;
+  font-size: 20px;
+`;
+
 const Input = styled.input``;
 const Reset = styled.button`
   margin-top: 150px;
@@ -81,10 +93,10 @@ const Div = styled.div`
 const Sucess = styled.div``;
 const Goal = styled.div``;
 const InfoContainer = styled.div`
-  margin-top: 50px;
+  margin: 50px 0px 0px 20px;
   border: solid 2px black;
   width: 400px;
-  height: 400px;
+  height: 600px;
   text-align: center;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),

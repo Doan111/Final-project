@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 const ProfileCard = () => {
   // const { user, isAuthenticated } = useAuth0();
   const { user, isAuthenticated } = useContext(CurrentUserContext);
+
+  const [goalNum, setGoaNum] = useState(0);
+
+  const handleGoal = (event) => {
+    setGoaNum(event.target.value);
+  };
   const Number = 5;
   return (
     <>
@@ -17,11 +23,21 @@ const ProfileCard = () => {
             <Name> {user.nickname}</Name>
             <Div>
               <Goal>
-                Current goal:<Bold>{Number} activities</Bold>{" "}
+                Current goal:
+                <Bold>
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="set a number of activities"
+                    id="second"
+                    onChange={handleGoal}
+                  ></Input>{" "}
+                  activities
+                </Bold>{" "}
               </Goal>
               <Sucess>
                 Activities left to hit your target goal:
-                <Bold> {Number} activities</Bold>
+                <Bold> {goalNum} activities</Bold>
               </Sucess>
             </Div>
             <Reset>Reset goal</Reset>
@@ -33,6 +49,7 @@ const ProfileCard = () => {
     </>
   );
 };
+const Input = styled.input``;
 const Reset = styled.button`
   margin-top: 150px;
   width: 100px;

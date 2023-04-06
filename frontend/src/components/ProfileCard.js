@@ -13,6 +13,10 @@ const ProfileCard = () => {
   const handleGoal = (event) => {
     setGoaNum(event.target.value);
   };
+
+  const bikeNum = specificActivities.filter((item) => {
+    return item.sport === "bike";
+  });
   // verify with mohammed line 47 of profileCard
   // verify how to delete with automatic refresh
   // when a user post an activity it goes to the profilepage
@@ -58,10 +62,20 @@ const ProfileCard = () => {
             </Div>
 
             <SportDivider>
+              <SubTitle>Activities per sport</SubTitle>
               <SportWrapper>
-                <FaRunning style={{ fontSize: "24px" }} />
-                <FaBiking style={{ fontSize: "24px" }} />
-                <FaSwimmer style={{ fontSize: "24px" }} />
+                <Icon>
+                  <FaRunning style={{ fontSize: "24px" }} />
+                  {bikeNum.length}
+                </Icon>
+
+                <Icon>
+                  <FaBiking style={{ fontSize: "24px" }} />
+                </Icon>
+                <Icon>
+                  {" "}
+                  <FaSwimmer style={{ fontSize: "24px" }} />
+                </Icon>
               </SportWrapper>
             </SportDivider>
             <Reset>Reset goal</Reset>
@@ -73,6 +87,17 @@ const ProfileCard = () => {
     </>
   );
 };
+const Icon = styled.div`
+  &:hover {
+    border-bottom: 2px solid black;
+  }
+`;
+const SubTitle = styled.p`
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  font-weight: bold;
+`;
+
 const SportTitle = styled.div``;
 const SportWrapper = styled.div`
   display: flex;

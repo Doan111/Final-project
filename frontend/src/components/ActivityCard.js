@@ -3,7 +3,13 @@ import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
-import { FaRunning, FaSwimmer, FaBiking, FaRegThumbsUp } from "react-icons/fa";
+import {
+  FaRunning,
+  FaSwimmer,
+  FaBiking,
+  FaRegThumbsUp,
+  FaRegComment,
+} from "react-icons/fa";
 
 const ActivityCard = ({ activity }) => {
   const [isOpen, setIsOpen] = useState();
@@ -109,10 +115,18 @@ const ActivityCard = ({ activity }) => {
           <DivIconBottom>
             <LikeWrapper onClick={handleClick}>
               <LikeContainer hasBeenLiked={hasBeenLiked}>
-                <FaRegThumbsUp style={{ fill: hasBeenLiked ? "blue" : null, fontSize: "24px" }} />
+                <FaRegThumbsUp
+                  style={{
+                    fill: hasBeenLiked ? "grey" : null,
+                    fontSize: "24px",
+                  }}
+                />
               </LikeContainer>
               {like}
             </LikeWrapper>
+            <CommentIcon>
+              <FaRegComment style={{ fontSize: "24px" }} />
+            </CommentIcon>
           </DivIconBottom>
         </Wrapper>
       ) : (
@@ -121,7 +135,19 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
-const LikeWrapper = styled.div``;
+
+const CommentIcon = styled.div`
+  display: flex;
+  position: relative;
+  bottom: 80px;
+  left: 280px;
+`;
+const LikeWrapper = styled.div`
+  display: flex;
+  position: relative;
+  bottom: 52px;
+  left: 230px;
+`;
 const DivIconBottom = styled.div``;
 const LikeContainer = styled.div``;
 const Icon = styled.div`

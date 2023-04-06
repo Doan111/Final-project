@@ -3,11 +3,10 @@ import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 const ActivityCard = ({ activity }) => {
-  // const { user, isAuthenticated } = useAuth0();
-  const [isOpen, setIsOpen] = useState(false);
-  const [activityId, setActivity]
+  //   const { user, isAuthenticated } = useAuth0();
+  const [isOpen, setIsOpen] = useState();
 
   const { user, isAuthenticated, deleted, setDeleted } =
     useContext(CurrentUserContext);
@@ -22,35 +21,52 @@ const ActivityCard = ({ activity }) => {
         }
       });
   };
-  const handleUpdate = (id) => {
-    fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status == 204) {
-          setDeleted(!deleted);
-          window.alert("Deleted!");
-        }
-      });
-  };
+  //   const handleUpdate = (id) => {
+  //     fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.status == 204) {
+  //           setDeleted(!deleted);
+  //           window.alert("Deleted!");
+  //         }
+  //       });
+  //   };
   return (
     <>
       {isAuthenticated ? (
         <Wrapper>
           <InfoContainer>
-            <Div>{activity.distance} </Div>
-            <p>Energy {activity.energy}</p>
-            <Image src={user.picture} alt={user.name} />
-            <Name> {user.nickname}</Name>
-          </InfoContainer>
-          <button
-            onClick={() => {
-              handleDelete(activity._id);
-            }}
-          >
-            Delete
-          </button>
+            {/* <Div>{activity.distance} </Div> */}
 
-          <button>Edit</button>
+            <TopInformation>
+              <Image src={user.picture} alt={user.name} />
+              <Name> {user.nickname}</Name>
+            </TopInformation>
+            <Date>{activity.date}</Date>
+            <Title>{activity.title}</Title>
+            <DeleteButton
+              onClick={() => {
+                handleDelete(activity._id);
+              }}
+            >
+              Delete
+            </DeleteButton>
+
+            <DeleteButton>Edit</DeleteButton>
+            <Div>
+              <Distance>
+                <Distance>Distance</Distance>
+                <DistanceNumber>
+                  {activity.distance}
+                  {activity.unit}
+                </DistanceNumber>
+              </Distance>
+              <Time>
+                <TimeTitle>Time</TimeTitle>
+                    <ActuelTime>{activity.time}</ActuelTime>
+              </Time>
+            </Div>
+          </InfoContainer>
         </Wrapper>
       ) : (
         <Error />
@@ -58,6 +74,36 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+const ActuelTime = styled.div`
+`;
+const TimeTitle = styled.p`
+`;
+const Time = styled.div`
+`
+
+
+const DistanceNumber = styled.div``;
+const Distance = styled.p``;
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 25px;
+  position: relative;
+  margin-left: -110px;
+  top: -30px;
+`;
+const Date = styled.div`
+  position: relative;
+  margin-left: -215px;
+  top: -40px;
+`;
+
+const DeleteButton = styled.button``;
+const TopInformation = styled.div`
+  display: flex;
+  justify-content: start;
+  margin-top: 10px;
+`;
+
 const Div = styled.div``;
 const InfoContainer = styled.div`
   margin-top: 50px;
@@ -70,18 +116,29 @@ const InfoContainer = styled.div`
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07);
   border-radius: 10px;
-  border: solid 2px lightgrey;
+  border: solid 2px black;
   text-decoration: none;
 `;
 
 const Name = styled.div`
   font-size: 20px;
   font-weight: bold;
+  margin-left: 25px;
 `;
 
 const Image = styled.img`
   border-radius: 50%;
+  height: 75px;
+  margin-left: 50px;
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 200px;
+  position: relative;
+  top: -400px;
+`;
 
 export default ActivityCard;

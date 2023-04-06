@@ -20,7 +20,7 @@ const UploadActivity = () => {
       [key]: value,
     });
   };
-  // use userEmail
+
   const handleSubmit = () => {
     fetch("/api/add-activity", {
       method: "POST",

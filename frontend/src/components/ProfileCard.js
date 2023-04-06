@@ -3,21 +3,23 @@ import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { FaRunning, FaSwimmer, FaBiking } from "react-icons/fa";
 const ProfileCard = () => {
-  // const { user, isAuthenticated } = useAuth0();
   const { user, isAuthenticated, specificActivities } =
     useContext(CurrentUserContext);
 
   const [goalNum, setGoaNum] = useState(0);
 
-  console.log(specificActivities);
-
   const handleGoal = (event) => {
     setGoaNum(event.target.value);
   };
   // verify with mohammed line 47 of profileCard
-  const actLeft = goalNum - specificActivities.length;
+  // verify how to delete with automatic refresh
+  // when a user post an activity it goes to the profilepage
+  // Add are you sure you want to delete this activity alert
+  // work on the update
+  // work on activity detail page?
+  let actLeft = goalNum - specificActivities.length;
 
   const Number = 5;
   return (
@@ -43,7 +45,9 @@ const ProfileCard = () => {
               </Goal>
               <Sucess>
                 Activities left to hit your target goal:
-                <Bold> {actLeft} activities</Bold>
+                <Bold>
+                  {actLeft < 0 || actLeft === 0 ? 0 : actLeft} activities
+                </Bold>
                 {actLeft === 0 && (
                   <GoalComplete>
                     Congratulation on reaching your goal! Please reset and set a
@@ -52,6 +56,14 @@ const ProfileCard = () => {
                 )}
               </Sucess>
             </Div>
+
+            <SportDivider>
+              <SportWrapper>
+                <FaRunning style={{ fontSize: "24px" }} />
+                <FaBiking style={{ fontSize: "24px" }} />
+                <FaSwimmer style={{ fontSize: "24px" }} />
+              </SportWrapper>
+            </SportDivider>
             <Reset>Reset goal</Reset>
           </InfoContainer>
         </Wrapper>
@@ -61,6 +73,22 @@ const ProfileCard = () => {
     </>
   );
 };
+const SportTitle = styled.div``;
+const SportWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+`;
+const SportDivider = styled.div`
+  border: 2px solid black;
+  position: relative;
+  height: 180px;
+  margin-left: 40px;
+
+  width: 80%;
+  bottom: -50px;
+`;
+
 const GoalComplete = styled.div`
   margin-top: 5px;
   border: 2px solid black;
@@ -69,7 +97,7 @@ const GoalComplete = styled.div`
 
 const Input = styled.input``;
 const Reset = styled.button`
-  margin-top: 150px;
+  margin-top: 100px;
   width: 100px;
   text-decoration: none;
   color: white;

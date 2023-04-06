@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const ProfileCard = () => {
   // const { user, isAuthenticated } = useAuth0();
   const { user, isAuthenticated } = useContext(CurrentUserContext);
+  const Number = 5;
   return (
     <>
       {isAuthenticated ? (
@@ -14,6 +15,10 @@ const ProfileCard = () => {
           <InfoContainer>
             <Image src={user.picture} alt={user.name} />
             <Name> {user.nickname}</Name>
+            <Div>
+              <Goal>Current goal:<Bold>{Number} activities</Bold> </Goal>
+              <Sucess>Activities left to hit your target goal:<Bold> {Number} activities</Bold></Sucess>
+            </Div>
           </InfoContainer>
         </Wrapper>
       ) : (
@@ -22,7 +27,21 @@ const ProfileCard = () => {
     </>
   );
 };
-
+const Bold = styled.span`
+  font-weight:bold;
+  margin-left:4px;
+`;
+const Div = styled.div`
+  display:flex;
+  flex-direction:column;
+`;
+const Sucess = styled.div`
+  
+`;
+const Goal = styled.div`
+ 
+  
+`;
 const InfoContainer = styled.div`
   margin-top: 50px;
   border: solid 2px black;
@@ -39,8 +58,9 @@ const InfoContainer = styled.div`
 `;
 
 const Name = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+  margin-bottom:10px;
 `;
 
 const Image = styled.img`

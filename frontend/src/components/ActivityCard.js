@@ -60,6 +60,7 @@ const ActivityCard = ({ activity }) => {
               <Image src={user.picture} alt={user.name} />
               <Name> {user.nickname}</Name>
             </TopInformation>
+
             {activity.date && <Date>{activity.date}</Date>}
             {activity.title && <Title>{activity.title}</Title>}
             <DeleteButton
@@ -88,10 +89,12 @@ const ActivityCard = ({ activity }) => {
                 </Time>
               )}
             </BottomInformation>
-            <DescriptionWrapper>
-              <DescriptionTitle>Activity description</DescriptionTitle>
-              <ActuelDescription>{activity.description}</ActuelDescription>
-            </DescriptionWrapper>
+            {activity.description && (
+              <DescriptionWrapper>
+                <DescriptionTitle>Activity description</DescriptionTitle>
+                <ActuelDescription>{activity.description}</ActuelDescription>
+              </DescriptionWrapper>
+            )}
             <IconContainer>
               <Icon>
                 {" "}
@@ -136,6 +139,7 @@ const ActivityCard = ({ activity }) => {
   );
 };
 
+const StyleDistance = styled.p``;
 const CommentIcon = styled.div`
   display: flex;
   position: relative;

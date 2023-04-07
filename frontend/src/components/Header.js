@@ -11,12 +11,14 @@ const Header = () => {
     <div>
       <Wrapper>
         <Title to="/profile">Burn</Title>
+        {isAuthenticated &&  <InputSearch type="text"id="search" name="search" placeholder="search for a user" />}
         <Nav>
           <NavLink>
             {!isAuthenticated ? (
               <LogInButton />
             ) : (
               <>
+                 
                 <ProfilePic src={user.picture} alt={user.name} />{" "}
                 <Icon to="/activity">
                   <FiPlusCircle style={{ fontSize: "34px" }} />
@@ -31,7 +33,14 @@ const Header = () => {
     </div>
   );
 };
-
+  const InputSearch = styled.input`
+  text-align:center;
+  border-radius:50px;
+  margin-top:8px;
+  height:30px;
+  position:relative;
+  right:420px;
+  `;
 const Upload = styled.span`
   border: 1px solid black;
   display: none;

@@ -105,11 +105,16 @@ const ProfileCard = () => {
             </SportDivider>
             <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>
             {showNotice && (
-              <div>
-                <p> Are you sure you want to delete all activities?</p>
-                <button onClick={handleClick}>Yes</button>
-                <button onClick={() => setShowNotice(true)}>No</button>
-              </div>
+              <WrapperNotice>
+                <GoalComplete>
+                  {" "}
+                  Are you sure you want to delete all activities?
+                </GoalComplete>
+                <ButtonNotice onClick={handleClick}>Yes</ButtonNotice>
+                <ButtonNotice onClick={() => setShowNotice(true)}>
+                  No
+                </ButtonNotice>
+              </WrapperNotice>
             )}
           </InfoContainer>
         </Wrapper>
@@ -119,8 +124,12 @@ const ProfileCard = () => {
     </>
   );
 };
+
+const ButtonNotice = styled.button``;
+const WrapperNotice = styled.div``;
+
 const Icon = styled.div``;
-const SubTitle = styled.p`
+const SubTitle = styled.div`
   border-bottom: 2px solid black;
   padding-bottom: 10px;
   font-weight: bold;

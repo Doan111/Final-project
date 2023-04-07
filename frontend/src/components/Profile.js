@@ -10,7 +10,11 @@ const Profile = () => {
       <ProfileCard />
       {specificActivities &&
         specificActivities.map((activity) => {
-          return <ActivityCard activity={activity}> </ActivityCard>;
+          return (
+            <ActivityCard key={activity._id} activity={activity}>
+              {" "}
+            </ActivityCard>
+          );
         })}
     </>
   );

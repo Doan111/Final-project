@@ -11,6 +11,7 @@ const {
   deleteActivity,
   updateActivity,
   getActivitiesByUser,
+  deleteAllActivities,
 } = require("./handlers");
 
 express()
@@ -30,6 +31,8 @@ express()
   .post("/api/add-activity", addActivity)
   // delete an id based on its unique id
   .delete("/api/delete-activity/:activity", deleteActivity)
+  // delete all activities
+  .delete("/api/delete-all-activities",deleteAllActivities)
   //update an activity
   .patch("/api/update-activity", updateActivity)
   // get all activities from a single user

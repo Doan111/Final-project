@@ -9,20 +9,41 @@ const ProfileCard = () => {
     useContext(CurrentUserContext);
 
   const [goalNum, setGoaNum] = useState(0);
-
+  const [showNotice, setShowNotice] = useState(false);
   const handleGoal = (event) => {
     setGoaNum(event.target.value);
+  };
+  // code to delete all activities
+  const handleClick = () => {
+    fetch(`/api/delete-all-activities`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 204) {
+          window.alert("All activities were deleted!");
+        }
+      });
+    setShowNotice(false);
   };
 
   const bikeNum = specificActivities.filter((item) => {
     return item.sport === "bike";
   });
-  // verify with mohammed line 47 of profileCard
-  // verify how to delete with automatic refresh
+
+  const runNum = specificActivities.filter((item) => {
+    return item.sport === "run";
+  });
+
+  const swimNum = specificActivities.filter((item) => {
+    return item.sport === "swim";
+  });
+  // verify with mohammed line 47 of profileCard(functions)
+  // verify how to delete with automatic refresh with are you sure you want to delete
   // when a user post an activity it goes to the profilepage
-  // Add are you sure you want to delete this activity alert
-  // work on the update
+  // work on the update button
+  // work on commment section
+  // link user to mongoDb and add search input to search for users
   // work on activity detail page?
+  // work on reset button if clicked all activities will be deleted.
   let actLeft = goalNum - specificActivities.length;
 
   const Number = 5;
@@ -55,7 +76,8 @@ const ProfileCard = () => {
                 {actLeft === 0 && (
                   <GoalComplete>
                     Congratulation on reaching your goal! Please reset and set a
-                    new goal.
+                    new goal. By resetting, all your current activities will be
+                    deleted.
                   </GoalComplete>
                 )}
               </Sucess>
@@ -66,19 +88,29 @@ const ProfileCard = () => {
               <SportWrapper>
                 <Icon>
                   <FaRunning style={{ fontSize: "24px" }} />
-                  {bikeNum.length}
+                  {runNum.length}
                 </Icon>
 
                 <Icon>
                   <FaBiking style={{ fontSize: "24px" }} />
+                  {bikeNum.length}
                 </Icon>
+
                 <Icon>
                   {" "}
                   <FaSwimmer style={{ fontSize: "24px" }} />
+                  {swimNum.length}
                 </Icon>
               </SportWrapper>
             </SportDivider>
-            <Reset>Reset goal</Reset>
+            <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>
+            {showNotice && (
+              <div>
+                <p> Are you sure you want to delete all activities?</p>
+                <button onClick={handleClick}>Yes</button>
+                <button onClick={() => setShowNotice(true)}>No</button>
+              </div>
+            )}
           </InfoContainer>
         </Wrapper>
       ) : (
@@ -87,11 +119,7 @@ const ProfileCard = () => {
     </>
   );
 };
-const Icon = styled.div`
-  &:hover {
-    border-bottom: 2px solid black;
-  }
-`;
+const Icon = styled.div``;
 const SubTitle = styled.p`
   border-bottom: 2px solid black;
   padding-bottom: 10px;
@@ -122,7 +150,7 @@ const GoalComplete = styled.div`
 
 const Input = styled.input``;
 const Reset = styled.button`
-  margin-top: 100px;
+  margin-top: 10px;
   width: 100px;
   text-decoration: none;
   color: white;

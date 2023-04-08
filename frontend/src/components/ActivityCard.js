@@ -121,21 +121,33 @@ const ActivityCard = ({ activity }) => {
                 />
               </EditTitle>
             )}
-            <DeleteButton
-              onClick={() => {
-                handleDelete(activity._id);
-              }}
-            >
-              X
-            </DeleteButton>
-
-            <DeleteButton
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              Edit
-            </DeleteButton>
+            {!isOpen && (
+              <DeleteButton
+                onClick={() => {
+                  handleDelete(activity._id);
+                }}
+              >
+                X
+              </DeleteButton>
+            )}
+            {isOpen && (
+              <CancelButton
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              >
+                Cancel
+              </CancelButton>
+            )}
+            {!isOpen && (
+              <DeleteButton
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              >
+                Edit
+              </DeleteButton>
+            )}
             <BottomInformation>
               {activity.distance && !isOpen && (
                 <Distance>
@@ -265,12 +277,29 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+
+const CancelButton = styled.button`
+  position: relative;
+  top: 215px;
+  left: 110px;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
+  &:hover {
+    filter: brightness(85%);
+  }
+`;
+
 const EditDistance = styled.div`
   display: flex;
   height: 20px;
   position: relative;
   top: 130px;
-  left:60px;
+  left: 60px;
 `;
 const EditTitle = styled.div`
   position: relative;
@@ -288,7 +317,7 @@ const EditTime = styled.div`
   height: 20px;
   display: flex;
   position: relative;
-  top: 220px;
+  top: 210px;
   right: 250px;
 `;
 
@@ -320,7 +349,7 @@ const SaveButton = styled.button`
 const EditSport = styled.div`
   position: relative;
   top: -15px;
-  right:50px;
+  right: 50px;
   margin: 0;
 `;
 const CommentIcon = styled.div`

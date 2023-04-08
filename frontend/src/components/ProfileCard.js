@@ -36,10 +36,9 @@ const ProfileCard = () => {
   const swimNum = specificActivities.filter((item) => {
     return item.sport === "swim";
   });
-  // verify with mohammed line 47 of profileCard(functions)
+  // verify  line 47 of profileCard(functions)
   // verify how to delete with automatic refresh with are you sure you want to delete
   // when a user post an activity it goes to the profilepage
-  // work on the update button
   // work on commment section
   // link user to mongoDb and add search input to search for users
   // work on activity detail page?

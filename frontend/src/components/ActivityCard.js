@@ -40,7 +40,8 @@ const ActivityCard = ({ activity }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status == 204) {
-          setDeleted(!deleted);
+          // window alert dont appear and page dont automatically refresh
+
           window.alert("Deleted!");
         }
       });
@@ -85,8 +86,12 @@ const ActivityCard = ({ activity }) => {
         <Wrapper>
           <InfoContainer>
             <TopInformation>
-              <Image src={user.picture} alt={user.name} />
-              <Name> {user.nickname}</Name>
+              {!isOpen && (
+                <>
+                  <Image src={user.picture} alt={user.name} />
+                  <Name> {user.nickname}</Name>
+                </>
+              )}
             </TopInformation>
 
             {activity.date && !isOpen && <Date>{activity.date}</Date>}
@@ -94,7 +99,6 @@ const ActivityCard = ({ activity }) => {
               <input
                 onChange={hanldeChange}
                 name="date"
-                style={{ zIndex: "1000" }}
                 value={updateData.date}
               />
             )}
@@ -108,7 +112,6 @@ const ActivityCard = ({ activity }) => {
               <input
                 onChange={hanldeChange}
                 name="title"
-                style={{ zIndex: "1000" }}
                 value={updateData.title}
               />
             )}
@@ -144,23 +147,12 @@ const ActivityCard = ({ activity }) => {
                   <input
                     onChange={hanldeChange}
                     name="distance"
-                    style={{ zIndex: "1000" }}
                     value={updateData.distance}
                   />
-                  <select
-                    onChange={hanldeChange}
-                    name="unit"
-                    style={{ zIndex: "1000" }}
-                  >
-                    <option value="kilometers" style={{ zIndex: "1000" }}>
-                      kilometers
-                    </option>
-                    <option value="mile" style={{ zIndex: "1000" }}>
-                      Mile
-                    </option>
-                    <option value="meters" style={{ zIndex: "1000" }}>
-                      Meters
-                    </option>
+                  <select onChange={hanldeChange} name="unit">
+                    <option value="kilometers">kilometers</option>
+                    <option value="mile">Mile</option>
+                    <option value="meters">Meters</option>
                   </select>
                 </>
               )}
@@ -176,7 +168,6 @@ const ActivityCard = ({ activity }) => {
                 <input
                   onChange={hanldeChange}
                   name="time"
-                  style={{ zIndex: "1000" }}
                   value={updateData.time}
                 />
               )}
@@ -194,29 +185,22 @@ const ActivityCard = ({ activity }) => {
               <input
                 onChange={hanldeChange}
                 name="description"
-                style={{ zIndex: "1000" }}
                 value={updateData.description}
               />
             )}
 
             {isOpen && (
-              <select
-                onChange={hanldeChange}
-                name="sport"
-                style={{ zIndex: "1000" }}
-              >
-                <option value="run" style={{ zIndex: "1000" }}>
-                  Run
-                </option>
-                <option value="swim" style={{ zIndex: "1000" }}>
-                  Swim
-                </option>
-                <option value="bike" style={{ zIndex: "1000" }}>
-                  Bike
-                </option>
-              </select>
+              <EditBottom>
+                <select onChange={hanldeChange} name="sport">
+                  <option value="run">Run</option>
+                  <option value="swim">Swim</option>
+                  <option value="bike">Bike</option>
+                </select>
+              </EditBottom>
             )}
-            {isOpen && <button onClick={handleEdit}>Save changes</button>}
+            {isOpen && (
+              <SaveButton onClick={handleEdit}>Save changes</SaveButton>
+            )}
             {!isOpen && (
               <IconContainer>
                 <Icon>
@@ -238,23 +222,24 @@ const ActivityCard = ({ activity }) => {
               </IconContainer>
             )}
           </InfoContainer>
-
-          <DivIconBottom>
-            <LikeWrapper onClick={handleClick}>
-              <LikeContainer hasBeenLiked={hasBeenLiked}>
-                <FaRegThumbsUp
-                  style={{
-                    fill: hasBeenLiked ? "grey" : null,
-                    fontSize: "24px",
-                  }}
-                />
-              </LikeContainer>
-              {like}
-            </LikeWrapper>
-            <CommentIcon>
-              <FaRegComment style={{ fontSize: "24px" }} />
-            </CommentIcon>
-          </DivIconBottom>
+          {!isOpen && (
+            <DivIconBottom>
+              <LikeWrapper onClick={handleClick}>
+                <LikeContainer hasBeenLiked={hasBeenLiked}>
+                  <FaRegThumbsUp
+                    style={{
+                      fill: hasBeenLiked ? "grey" : null,
+                      fontSize: "24px",
+                    }}
+                  />
+                </LikeContainer>
+                {like}
+              </LikeWrapper>
+              <CommentIcon>
+                <FaRegComment style={{ fontSize: "24px" }} />
+              </CommentIcon>
+            </DivIconBottom>
+          )}
         </Wrapper>
       ) : (
         <Error />
@@ -262,8 +247,15 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
-
-const StyleDistance = styled.p``;
+const SaveButton = styled.button`
+  position: relative;
+  top: 150px;
+`;
+const EditBottom = styled.div`
+  position: relative;
+  /* top: 150px; */
+  margin: 0;
+`;
 const CommentIcon = styled.div`
   display: flex;
   position: relative;

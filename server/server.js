@@ -12,7 +12,7 @@ const {
   updateActivity,
   getActivitiesByUser,
   deleteAllActivities,
-} = require("./handlers");
+} = require("./activityHandlers");
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.

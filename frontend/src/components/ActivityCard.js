@@ -12,11 +12,28 @@ import {
 } from "react-icons/fa";
 
 const ActivityCard = ({ activity }) => {
-  const [isOpen, setIsOpen] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [updateData, setUpdateData] = useState({
+    _id: activity._id,
+    date: activity.date,
+    time: activity.time,
+    unit: activity.unit,
+    distance: activity.distance,
+    title: activity.title,
+    description: activity.description,
+    sport: activity.sport,
+  });
   const [like, setLikes] = useState(0);
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
-  const { user, isAuthenticated, deleted, setDeleted } =
-    useContext(CurrentUserContext);
+  const {
+    user,
+    isAuthenticated,
+    deleted,
+    setDeleted,
+    isUpdated,
+    setIsUpdated,
+  } = useContext(CurrentUserContext);
 
   const handleDelete = (id) => {
     fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
@@ -27,6 +44,10 @@ const ActivityCard = ({ activity }) => {
           window.alert("Deleted!");
         }
       });
+  };
+
+  const hanldeChange = (e) => {
+    setUpdateData({ ...updateData, [e.target.name]: e.target.value });
   };
 
   const handleClick = (event) => {
@@ -41,16 +62,23 @@ const ActivityCard = ({ activity }) => {
     }
   };
 
-  //   const handleUpdate = (id) => {
-  //     fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         if (data.status == 204) {
-  //           setDeleted(!deleted);
-  //           window.alert("Deleted!");
-  //         }
-  //       });
-  //   };
+  const handleEdit = (id) => {
+    fetch(`/api/update-activity`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 200) {
+          setIsUpdated(!isUpdated);
+          window.alert("updated!");
+        }
+      });
+  };
   return (
     <>
       {isAuthenticated ? (
@@ -61,8 +89,29 @@ const ActivityCard = ({ activity }) => {
               <Name> {user.nickname}</Name>
             </TopInformation>
 
-            {activity.date && <Date>{activity.date}</Date>}
-            {activity.title && <Title>{activity.title}</Title>}
+            {activity.date && !isOpen && <Date>{activity.date}</Date>}
+            {isOpen && (
+              <input
+                onChange={hanldeChange}
+                name="date"
+                style={{ zIndex: "1000" }}
+                value={updateData.date}
+              />
+            )}
+
+            {activity.title && !isOpen && (
+              <>
+                <Title>{activity.title}</Title>
+              </>
+            )}
+            {isOpen && (
+              <input
+                onChange={hanldeChange}
+                name="title"
+                style={{ zIndex: "1000" }}
+                value={updateData.title}
+              />
+            )}
             <DeleteButton
               onClick={() => {
                 handleDelete(activity._id);
@@ -71,48 +120,123 @@ const ActivityCard = ({ activity }) => {
               X
             </DeleteButton>
 
-            <DeleteButton>Edit</DeleteButton>
+            <DeleteButton
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            >
+              Edit
+            </DeleteButton>
             <BottomInformation>
-              {activity.distance && (
+              {activity.distance && !isOpen && (
                 <Distance>
                   <DistanceTitle>Distance</DistanceTitle>
-                  <DistanceNumber>
-                    {activity.distance}
-                    {activity.unit}
-                  </DistanceNumber>
+                  <>
+                    <DistanceNumber>
+                      {activity.distance}
+                      {activity.unit}
+                    </DistanceNumber>
+                  </>
                 </Distance>
               )}
-              {activity.time && (
+              {isOpen && (
+                <>
+                  <input
+                    onChange={hanldeChange}
+                    name="distance"
+                    style={{ zIndex: "1000" }}
+                    value={updateData.distance}
+                  />
+                  <select
+                    onChange={hanldeChange}
+                    name="unit"
+                    style={{ zIndex: "1000" }}
+                  >
+                    <option value="kilometers" style={{ zIndex: "1000" }}>
+                      kilometers
+                    </option>
+                    <option value="mile" style={{ zIndex: "1000" }}>
+                      Mile
+                    </option>
+                    <option value="meters" style={{ zIndex: "1000" }}>
+                      Meters
+                    </option>
+                  </select>
+                </>
+              )}
+              {activity.time && !isOpen && (
                 <Time>
                   <TimeTitle>Time</TimeTitle>
-                  <ActuelTime>{activity.time}</ActuelTime>
+                  <>
+                    <ActuelTime>{activity.time}</ActuelTime>
+                  </>
                 </Time>
               )}
+              {isOpen && (
+                <input
+                  onChange={hanldeChange}
+                  name="time"
+                  style={{ zIndex: "1000" }}
+                  value={updateData.time}
+                />
+              )}
             </BottomInformation>
-            {activity.description && (
+            {activity.description && !isOpen && (
               <DescriptionWrapper>
                 <DescriptionTitle>Activity description</DescriptionTitle>
-                <ActuelDescription>{activity.description}</ActuelDescription>
+                <>
+                  {" "}
+                  <ActuelDescription>{activity.description}</ActuelDescription>
+                </>
               </DescriptionWrapper>
             )}
-            <IconContainer>
-              <Icon>
-                {" "}
-                {activity.sport === "bike" && (
-                  <FaBiking style={{ fontSize: "34px" }} />
-                )}
-              </Icon>
-              <Icon>
-                {activity.sport === "swim" && (
-                  <FaSwimmer style={{ fontSize: "34px" }} />
-                )}
-              </Icon>
-              <Icon>
-                {activity.sport === "run" && (
-                  <FaRunning style={{ fontSize: "34px" }} />
-                )}
-              </Icon>
-            </IconContainer>
+            {isOpen && (
+              <input
+                onChange={hanldeChange}
+                name="description"
+                style={{ zIndex: "1000" }}
+                value={updateData.description}
+              />
+            )}
+
+            {isOpen && (
+              <select
+                onChange={hanldeChange}
+                name="sport"
+                style={{ zIndex: "1000" }}
+              >
+                <option value="run" style={{ zIndex: "1000" }}>
+                  Run
+                </option>
+                <option value="swim" style={{ zIndex: "1000" }}>
+                  Swim
+                </option>
+                <option value="bike" style={{ zIndex: "1000" }}>
+                  Bike
+                </option>
+              </select>
+            )}
+            {isOpen && <button onClick={handleEdit}>Save changes</button>}
+            {!isOpen && (
+              <IconContainer>
+                <Icon>
+                  {" "}
+                  {activity.sport === "bike" && (
+                    <FaBiking style={{ fontSize: "34px" }} />
+                  )}
+                </Icon>
+                <Icon>
+                  {activity.sport === "swim" && (
+                    <FaSwimmer style={{ fontSize: "34px" }} />
+                  )}
+                </Icon>
+                <Icon>
+                  {activity.sport === "run" && (
+                    <FaRunning style={{ fontSize: "34px" }} />
+                  )}
+                </Icon>
+              </IconContainer>
+            )}
           </InfoContainer>
 
           <DivIconBottom>

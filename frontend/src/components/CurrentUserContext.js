@@ -6,6 +6,7 @@ export const CurrentUserContext = createContext(null);
 export const CurrentUserProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
   const [activities, setActivities] = useState();
+  const [isUpdated, setIsUpdated] = useState(false);
   const [specificActivities, setSpecificActivities] = useState([]);
   const [deleted, setDeleted] = useState(false);
   // all activities in the data base could be used for a homepage
@@ -32,7 +33,7 @@ export const CurrentUserProvider = ({ children }) => {
           console.log(error);
         });
     }
-  }, [isAuthenticated, deleted]);
+  }, [isAuthenticated, deleted, isUpdated]);
 
   return (
     <CurrentUserContext.Provider
@@ -46,6 +47,8 @@ export const CurrentUserProvider = ({ children }) => {
         specificActivities,
         deleted,
         setDeleted,
+        isUpdated,
+        setIsUpdated,
       }}
     >
       {children}

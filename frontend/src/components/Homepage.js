@@ -28,9 +28,9 @@ const Homepage = () => {
             </Text2>
             <Text3>Already a member?</Text3>
             <LogInButton />
-            <Text3>
+            {/* <Text3>
               If not, click here to <BorderBottom>sign up!</BorderBottom>
-            </Text3>
+            </Text3> */}
           </Information>
         </Wrapper>
       </Container>

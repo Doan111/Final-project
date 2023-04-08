@@ -192,26 +192,28 @@ const ActivityCard = ({ activity }) => {
               </DescriptionWrapper>
             )}
             {isOpen && (
-              <DescriptionEdit>
-                <Label htmlFor="description">Description: </Label>
-                <input
-                  onChange={hanldeChange}
-                  name="description"
-                  value={updateData.description}
-                />
-              </DescriptionEdit>
+              <>
+                <DescriptionEdit>
+                  <Label htmlFor="description">Description: </Label>
+                  <textarea
+                    onChange={hanldeChange}
+                    name="description"
+                    value={updateData.description}
+                  />
+                </DescriptionEdit>
+              </>
             )}
 
             {isOpen && (
               <>
-                <EditBottom>
+                <EditSport>
                   <Label htmlFor="sport">Sport: </Label>
                   <select onChange={hanldeChange} name="sport">
                     <option value="run">Run</option>
                     <option value="swim">Swim</option>
                     <option value="bike">Bike</option>
                   </select>
-                </EditBottom>
+                </EditSport>
               </>
             )}
             {isOpen && (
@@ -265,34 +267,44 @@ const ActivityCard = ({ activity }) => {
 };
 const EditDistance = styled.div`
   display: flex;
-  height: 25px;
+  height: 20px;
+  position: relative;
+  top: 130px;
+  left:60px;
 `;
 const EditTitle = styled.div`
   position: relative;
-  top: 70px;
+  top: 30px;
+  height: 20px;
 `;
 
 const EditDate = styled.div`
   position: relative;
-  top: 130px;
+  top: 180px;
+  height: 20px;
 `;
 
 const EditTime = styled.div`
+  height: 20px;
+  display: flex;
   position: relative;
-  top: 180px;
-  right: 200px;
+  top: 220px;
+  right: 250px;
 `;
 
 const DescriptionEdit = styled.div`
   position: relative;
-  top: 130px;
+  top: 1300px;
+  height: 20px;
+  right: 50px;
 `;
 
 const Label = styled.label``;
 
 const SaveButton = styled.button`
+  left: 230px;
   position: relative;
-  top: 150px;
+  top: 130px;
   width: 100px;
   text-decoration: none;
   color: white;
@@ -305,9 +317,10 @@ const SaveButton = styled.button`
   }
 `;
 
-const EditBottom = styled.div`
+const EditSport = styled.div`
   position: relative;
-  top: 140px;
+  top: -15px;
+  right:50px;
   margin: 0;
 `;
 const CommentIcon = styled.div`

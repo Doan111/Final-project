@@ -96,11 +96,14 @@ const ActivityCard = ({ activity }) => {
 
             {activity.date && !isOpen && <Date>{activity.date}</Date>}
             {isOpen && (
-              <input
-                onChange={hanldeChange}
-                name="date"
-                value={updateData.date}
-              />
+              <EditDate>
+                <Label htmlFor="Date">Date: </Label>
+                <input
+                  onChange={hanldeChange}
+                  name="date"
+                  value={updateData.date}
+                />
+              </EditDate>
             )}
 
             {activity.title && !isOpen && (
@@ -109,11 +112,14 @@ const ActivityCard = ({ activity }) => {
               </>
             )}
             {isOpen && (
-              <input
-                onChange={hanldeChange}
-                name="title"
-                value={updateData.title}
-              />
+              <EditTitle>
+                <Label htmlFor="Title"> Title: </Label>
+                <input
+                  onChange={hanldeChange}
+                  name="title"
+                  value={updateData.title}
+                />
+              </EditTitle>
             )}
             <DeleteButton
               onClick={() => {
@@ -143,7 +149,8 @@ const ActivityCard = ({ activity }) => {
                 </Distance>
               )}
               {isOpen && (
-                <>
+                <EditDistance>
+                  <Label htmlFor="distance"> Distance: </Label>
                   <input
                     onChange={hanldeChange}
                     name="distance"
@@ -154,7 +161,7 @@ const ActivityCard = ({ activity }) => {
                     <option value="mile">Mile</option>
                     <option value="meters">Meters</option>
                   </select>
-                </>
+                </EditDistance>
               )}
               {activity.time && !isOpen && (
                 <Time>
@@ -165,11 +172,14 @@ const ActivityCard = ({ activity }) => {
                 </Time>
               )}
               {isOpen && (
-                <input
-                  onChange={hanldeChange}
-                  name="time"
-                  value={updateData.time}
-                />
+                <EditTime>
+                  <Label htmlFor="time">Time: </Label>
+                  <input
+                    onChange={hanldeChange}
+                    name="time"
+                    value={updateData.time}
+                  />
+                </EditTime>
               )}
             </BottomInformation>
             {activity.description && !isOpen && (
@@ -182,21 +192,27 @@ const ActivityCard = ({ activity }) => {
               </DescriptionWrapper>
             )}
             {isOpen && (
-              <input
-                onChange={hanldeChange}
-                name="description"
-                value={updateData.description}
-              />
+              <DescriptionEdit>
+                <Label htmlFor="description">Description: </Label>
+                <input
+                  onChange={hanldeChange}
+                  name="description"
+                  value={updateData.description}
+                />
+              </DescriptionEdit>
             )}
 
             {isOpen && (
-              <EditBottom>
-                <select onChange={hanldeChange} name="sport">
-                  <option value="run">Run</option>
-                  <option value="swim">Swim</option>
-                  <option value="bike">Bike</option>
-                </select>
-              </EditBottom>
+              <>
+                <EditBottom>
+                  <Label htmlFor="sport">Sport: </Label>
+                  <select onChange={hanldeChange} name="sport">
+                    <option value="run">Run</option>
+                    <option value="swim">Swim</option>
+                    <option value="bike">Bike</option>
+                  </select>
+                </EditBottom>
+              </>
             )}
             {isOpen && (
               <SaveButton onClick={handleEdit}>Save changes</SaveButton>
@@ -247,13 +263,51 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+const EditDistance = styled.div`
+  display: flex;
+  height: 25px;
+`;
+const EditTitle = styled.div`
+  position: relative;
+  top: 70px;
+`;
+
+const EditDate = styled.div`
+  position: relative;
+  top: 130px;
+`;
+
+const EditTime = styled.div`
+  position: relative;
+  top: 180px;
+  right: 200px;
+`;
+
+const DescriptionEdit = styled.div`
+  position: relative;
+  top: 130px;
+`;
+
+const Label = styled.label``;
+
 const SaveButton = styled.button`
   position: relative;
   top: 150px;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
+  &:hover {
+    filter: brightness(85%);
+  }
 `;
+
 const EditBottom = styled.div`
   position: relative;
-  /* top: 150px; */
+  top: 140px;
   margin: 0;
 `;
 const CommentIcon = styled.div`

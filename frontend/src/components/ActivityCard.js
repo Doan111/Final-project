@@ -13,7 +13,7 @@ import {
 
 const ActivityCard = ({ activity }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [deleteComment, setDeleteComment] = useState(false);
   const [updateData, setUpdateData] = useState({
     _id: activity._id,
     date: activity.date,

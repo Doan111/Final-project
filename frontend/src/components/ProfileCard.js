@@ -107,15 +107,18 @@ const ProfileCard = () => {
                 </Icon>
               </SportWrapper>
             </SportDivider>
+
             <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>
+
             {showNotice && (
               <WrapperNotice>
                 <GoalComplete>
                   {" "}
-                  Are you sure you want to delete all activities?
+                  Are you sure you want to delete all activities and reset your
+                  goal?
                 </GoalComplete>
                 <ButtonNotice onClick={handleClick}>Yes</ButtonNotice>
-                <ButtonNotice onClick={() => setShowNotice(true)}>
+                <ButtonNotice onClick={() => setShowNotice(false)}>
                   No
                 </ButtonNotice>
               </WrapperNotice>
@@ -129,7 +132,11 @@ const ProfileCard = () => {
   );
 };
 
-const ButtonNotice = styled.button``;
+const ButtonNotice = styled.button`
+  &:hover {
+    filter: brightness(85%);
+  }
+`;
 const WrapperNotice = styled.div``;
 
 const Icon = styled.div``;
@@ -157,12 +164,18 @@ const SportDivider = styled.div`
 
 const GoalComplete = styled.div`
   margin-top: 5px;
-  border: 2px solid black;
+  width: 150px;
   font-size: 20px;
+  margin-top: 30px;
+  position: relative;
+  left: 120px;
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input``;
 const Reset = styled.button`
+  position: relative;
+
   margin-top: 10px;
   width: 100px;
   text-decoration: none;
@@ -173,8 +186,6 @@ const Reset = styled.button`
   border: none;
   &:hover {
     filter: brightness(85%);
-    font-size: 100px;
-    background-color: black;
   }
 `;
 
@@ -199,7 +210,7 @@ const InfoContainer = styled.div`
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07);
   border-radius: 10px;
-  border: solid 2px lightgrey;
+  border: solid 2px black;
   text-decoration: none;
 `;
 
@@ -212,6 +223,9 @@ const Name = styled.div`
 const Image = styled.img`
   border-radius: 50%;
 `;
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 0px;
+  margin-right: 100px;
+`;
 
 export default ProfileCard;

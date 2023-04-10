@@ -430,7 +430,7 @@ const Title = styled.div`
   right: 70px;
   margin-left: -50px;
   top: -40px;
-  width: 200px;
+  width: 240px;
   left: 160px;
 `;
 const Date = styled.div`
@@ -465,7 +465,7 @@ const InfoContainer = styled.div`
   margin-top: 50px;
   border: solid 2px black;
   width: 600px;
-  height: 300px;
+  height: 330px;
   text-align: center;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
@@ -493,10 +493,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 200px;
+  margin-left: 350px;
   position: relative;
   top: -640px;
   margin-top: 0px;
+
+  padding: 0px;
 `;
 
 export default ActivityCard;

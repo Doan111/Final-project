@@ -5,7 +5,7 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
 import { FaRunning, FaSwimmer, FaBiking } from "react-icons/fa";
 const ProfileCard = () => {
-  const { user, isAuthenticated, specificActivities } =
+  const { user, isAuthenticated, specificActivities, activities } =
     useContext(CurrentUserContext);
 
   const [goalNum, setGoaNum] = useState(0);
@@ -24,6 +24,11 @@ const ProfileCard = () => {
       });
     setShowNotice(false);
   };
+
+  // const distanceBike = specificActivities.filter((item) => {
+  //   return item.unit === "meters";
+  // });
+  // console.log(distanceBike);
 
   const bikeNum = specificActivities.filter((item) => {
     return item.sport === "bike";
@@ -168,6 +173,8 @@ const Reset = styled.button`
   border: none;
   &:hover {
     filter: brightness(85%);
+    font-size: 100px;
+    background-color: black;
   }
 `;
 

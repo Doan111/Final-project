@@ -27,6 +27,7 @@ const ActivityCard = ({ activity }) => {
   const [like, setLikes] = useState(0);
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
   const {
+    activities,
     user,
     isAuthenticated,
     deleted,
@@ -41,7 +42,7 @@ const ActivityCard = ({ activity }) => {
       .then((data) => {
         if (data.status == 204) {
           // window alert dont appear and page dont automatically refresh
-
+          setIsUpdated(!isUpdated);
           window.alert("Deleted!");
         }
       });
@@ -172,7 +173,7 @@ const ActivityCard = ({ activity }) => {
                     value={updateData.distance}
                   />
                   <select onChange={hanldeChange} name="unit">
-                    <option value="kilometers">kilometers</option>
+                    <option value="km">kilometers</option>
                     <option value="mile">Mile</option>
                     <option value="meters">Meters</option>
                   </select>
@@ -209,7 +210,7 @@ const ActivityCard = ({ activity }) => {
             {isOpen && (
               <>
                 <DescriptionEdit>
-                  <Label htmlFor="description">Description: </Label>
+                  <Label htmlFor="description"> Description: </Label>
                   <textarea
                     onChange={hanldeChange}
                     name="description"
@@ -380,6 +381,7 @@ const Icon = styled.div`
   position: relative;
   right: 215px;
   bottom: 180px;
+  top: -160px;
 `;
 
 const IconContainer = styled.div``;
@@ -391,7 +393,7 @@ const DescriptionTitle = styled.div`
 const DescriptionWrapper = styled.div`
   position: relative;
   top: -55px;
-  right: 0px;
+  right: px;
   border-bottom: 2px solid lightgrey;
 `;
 const ActuelDescription = styled.div`
@@ -406,24 +408,29 @@ const ActuelTime = styled.div`
 `;
 const TimeTitle = styled.p`
   color: lightgray;
+  
 `;
 const Time = styled.div`
   margin-left: 20px;
+  position:relative;
+  top:-15px;
 `;
 const DistanceTitle = styled.div`
   color: lightgray;
+  top: 90px;
 `;
 const DistanceNumber = styled.div`
   margin-left: 25px;
 `;
 
-const Distance = styled.p``;
+const Distance = styled.div``;
 const Title = styled.div`
   font-weight: bold;
   font-size: 25px;
   position: relative;
   margin-left: -110px;
-  top: -30px;
+  top: -40px;
+  right: 30px;
 `;
 const Date = styled.div`
   position: relative;

@@ -10,7 +10,7 @@ const UploadActivity = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useContext(CurrentUserContext);
   const [formData, setFormData] = useState({ unit: "kilometers" });
-  const [distance, setDistance] = useState(["kilometers", "meters", "miles"]);
+  const [distance, setDistance] = useState(["km", "meters", "miles"]);
   const [duration, setDuration] = useState([]);
   const [sport, setSport] = useState(["run", "swim", "bike"]);
 

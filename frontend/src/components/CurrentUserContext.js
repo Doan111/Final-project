@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, createContext } from "react";
-import { useParams } from "react-router-dom";
 export const CurrentUserContext = createContext(null);
 
 export const CurrentUserProvider = ({ children }) => {
@@ -26,7 +25,6 @@ export const CurrentUserProvider = ({ children }) => {
       fetch(`/api/get-activities/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("here", data);
           setSpecificActivities(data.data);
         })
         .catch((error) => {

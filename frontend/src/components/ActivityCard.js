@@ -96,14 +96,17 @@ const ActivityCard = ({ activity }) => {
 
             {activity.date && !isOpen && <Date>{activity.date}</Date>}
             {isOpen && (
-              <EditDate>
-                <Label htmlFor="Date">Date: </Label>
-                <input
-                  onChange={hanldeChange}
-                  name="date"
-                  value={updateData.date}
-                />
-              </EditDate>
+              <>
+                <TitleModify>Edit an input field</TitleModify>
+                <EditDate>
+                  <Label htmlFor="Date">Date: </Label>
+                  <input
+                    onChange={hanldeChange}
+                    name="date"
+                    value={updateData.date}
+                  />
+                </EditDate>
+              </>
             )}
 
             {activity.title && !isOpen && (
@@ -277,11 +280,18 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+const TitleModify = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  border-bottom: solid 2px black;
+  padding-bottom: 5px;
 
+  margin: 0px;
+`;
 const CancelButton = styled.button`
   position: relative;
-  top: 215px;
-  left: 110px;
+  top: 130px;
+  left: 230px;
   width: 100px;
   text-decoration: none;
   color: white;
@@ -303,7 +313,7 @@ const EditDistance = styled.div`
 `;
 const EditTitle = styled.div`
   position: relative;
-  top: 30px;
+  top: 20px;
   height: 20px;
 `;
 
@@ -323,9 +333,9 @@ const EditTime = styled.div`
 
 const DescriptionEdit = styled.div`
   position: relative;
-  top: 1300px;
+  top: -15px;
   height: 20px;
-  right: 50px;
+  right: -150px;
 `;
 
 const Label = styled.label``;
@@ -333,7 +343,7 @@ const Label = styled.label``;
 const SaveButton = styled.button`
   left: 230px;
   position: relative;
-  top: 130px;
+  top: 80px;
   width: 100px;
   text-decoration: none;
   color: white;
@@ -456,6 +466,7 @@ const InfoContainer = styled.div`
   border-radius: 10px;
   border: solid 2px black;
   text-decoration: none;
+  padding: 0px;
 `;
 
 const Name = styled.div`
@@ -477,6 +488,7 @@ const Wrapper = styled.div`
   margin-left: 200px;
   position: relative;
   top: -640px;
+  margin-top: 0px;
 `;
 
 export default ActivityCard;

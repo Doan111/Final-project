@@ -408,12 +408,11 @@ const ActuelTime = styled.div`
 `;
 const TimeTitle = styled.p`
   color: lightgray;
-  
 `;
 const Time = styled.div`
   margin-left: 20px;
-  position:relative;
-  top:-15px;
+  position: relative;
+  top: -15px;
 `;
 const DistanceTitle = styled.div`
   color: lightgray;
@@ -428,9 +427,11 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 25px;
   position: relative;
-  margin-left: -110px;
+  right: 70px;
+  margin-left: -50px;
   top: -40px;
-  right: 30px;
+  width: 200px;
+  left: 160px;
 `;
 const Date = styled.div`
   position: relative;

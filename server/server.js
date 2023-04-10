@@ -1,7 +1,8 @@
 // import the needed node_modules.
 const express = require("express");
 const morgan = require("morgan");
-
+//
+//handleDelete(activity._id);
 const {
   getActivities,
   getActivity,

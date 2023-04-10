@@ -87,15 +87,27 @@ const ActivityCard = ({ activity }) => {
         <Wrapper>
           <InfoContainer>
             <TopInformation>
-              {!isOpen && (
+              {!isOpen && !deleteComment && (
                 <>
                   <Image src={user.picture} alt={user.name} />
                   <Name> {user.nickname}</Name>
                 </>
               )}
             </TopInformation>
-
-            {activity.date && !isOpen && <Date>{activity.date}</Date>}
+            {deleteComment && (
+              <DeleteButtonWrapper>
+                <DeleteWrapper>
+                  <DeleteBtn
+                    onClick={() => {
+                      setDeleteComment(!deleteComment);
+                    }}
+                  >
+                    No
+                  </DeleteBtn>
+                </DeleteWrapper>
+              </DeleteButtonWrapper>
+            )}
+            {activity.date && !isOpen && !deleteComment && <Date>{activity.date}</Date>}
             {isOpen && (
               <>
                 <TitleModify>Edit an input field</TitleModify>
@@ -110,7 +122,7 @@ const ActivityCard = ({ activity }) => {
               </>
             )}
 
-            {activity.title && !isOpen && (
+            {activity.title && !isOpen && !deleteComment &&(
               <>
                 <Title>{activity.title}</Title>
               </>
@@ -128,12 +140,13 @@ const ActivityCard = ({ activity }) => {
             {!isOpen && (
               <DeleteButton
                 onClick={() => {
-                  handleDelete(activity._id);
+                    setDeleteComment(!deleteComment);
                 }}
               >
                 X
               </DeleteButton>
             )}
+
             {isOpen && (
               <CancelButton
                 onClick={() => {
@@ -281,6 +294,16 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
+
+const DeleteWrapper = styled.div``;
+
+const DeleteButtonWrapper = styled.div``;
+const DeleteBtn = styled.button`
+    position:relative;
+    left:100px;
+    top:200px;
+`;
+
 const TitleModify = styled.div`
   font-size: 25px;
   font-weight: bold;

@@ -86,7 +86,7 @@ const ProfileCard = () => {
                 )}
               </Sucess>
             </Div>
-
+                { !showNotice && 
             <SportDivider>
               <SubTitle>Activities per sport</SubTitle>
               <SportWrapper>
@@ -106,15 +106,15 @@ const ProfileCard = () => {
                   {swimNum.length}
                 </Icon>
               </SportWrapper>
-            </SportDivider>
-
-            <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>
+            </SportDivider>}
+                  {! showNotice &&
+            <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>}
 
             {showNotice && (
               <WrapperNotice>
                 <GoalComplete>
                   {" "}
-                  Are you sure you want to delete all activities and reset your
+                  Are you sure you want to delete all your activities and reset your current
                   goal?
                 </GoalComplete>
                 <ButtonNotice onClick={handleClick}>Yes</ButtonNotice>
@@ -133,11 +133,21 @@ const ProfileCard = () => {
 };
 
 const ButtonNotice = styled.button`
+  margin-left:3px;
+   width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
   &:hover {
     filter: brightness(85%);
   }
 `;
-const WrapperNotice = styled.div``;
+const WrapperNotice = styled.div`
+ 
+`;
 
 const Icon = styled.div``;
 const SubTitle = styled.div`
@@ -165,7 +175,7 @@ const SportDivider = styled.div`
 const GoalComplete = styled.div`
   margin-top: 5px;
   width: 150px;
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 30px;
   position: relative;
   left: 120px;

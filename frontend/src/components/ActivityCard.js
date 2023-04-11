@@ -42,7 +42,6 @@ const ActivityCard = ({ activity }) => {
       .then((data) => {
         if (data.status == 204) {
           // window alert dont appear and page dont automatically refresh
-          setIsUpdated(!isUpdated);
           window.alert("Deleted!");
         }
       });
@@ -96,7 +95,17 @@ const ActivityCard = ({ activity }) => {
             </TopInformation>
             {deleteComment && (
               <DeleteButtonWrapper>
+                <DeleteText>
+                  Are you sure you want to delete this activity?
+                </DeleteText>
                 <DeleteWrapper>
+                  <DeleteBtn
+                    onClick={() => {
+                      handleDelete(activity._id);
+                    }}
+                  >
+                    Yes
+                  </DeleteBtn>
                   <DeleteBtn
                     onClick={() => {
                       setDeleteComment(!deleteComment);
@@ -107,7 +116,9 @@ const ActivityCard = ({ activity }) => {
                 </DeleteWrapper>
               </DeleteButtonWrapper>
             )}
-            {activity.date && !isOpen && !deleteComment && <Date>{activity.date}</Date>}
+            {activity.date && !isOpen && !deleteComment && (
+              <Date>{activity.date}</Date>
+            )}
             {isOpen && (
               <>
                 <TitleModify>Edit an input field</TitleModify>
@@ -122,7 +133,7 @@ const ActivityCard = ({ activity }) => {
               </>
             )}
 
-            {activity.title && !isOpen && !deleteComment &&(
+            {activity.title && !isOpen && !deleteComment && (
               <>
                 <Title>{activity.title}</Title>
               </>
@@ -137,10 +148,10 @@ const ActivityCard = ({ activity }) => {
                 />
               </EditTitle>
             )}
-            {!isOpen && (
+            {!isOpen && !deleteComment && (
               <DeleteButton
                 onClick={() => {
-                    setDeleteComment(!deleteComment);
+                  setDeleteComment(!deleteComment);
                 }}
               >
                 X
@@ -156,7 +167,7 @@ const ActivityCard = ({ activity }) => {
                 Cancel
               </CancelButton>
             )}
-            {!isOpen && (
+            {!isOpen && !deleteComment && (
               <DeleteButton
                 onClick={() => {
                   setIsOpen(!isOpen);
@@ -166,7 +177,7 @@ const ActivityCard = ({ activity }) => {
               </DeleteButton>
             )}
             <BottomInformation>
-              {activity.distance && !isOpen && (
+              {activity.distance && !isOpen && !deleteComment && (
                 <Distance>
                   <DistanceTitle>Distance</DistanceTitle>
                   <>
@@ -192,7 +203,7 @@ const ActivityCard = ({ activity }) => {
                   </select>
                 </EditDistance>
               )}
-              {activity.time && !isOpen && (
+              {activity.time && !isOpen && !deleteComment && (
                 <Time>
                   <TimeTitle>Time</TimeTitle>
                   <>
@@ -211,7 +222,7 @@ const ActivityCard = ({ activity }) => {
                 </EditTime>
               )}
             </BottomInformation>
-            {activity.description && !isOpen && (
+            {activity.description && !isOpen && !deleteComment && (
               <DescriptionWrapper>
                 <DescriptionTitle>Activity description</DescriptionTitle>
                 <>
@@ -248,7 +259,7 @@ const ActivityCard = ({ activity }) => {
             {isOpen && (
               <SaveButton onClick={handleEdit}>Save changes</SaveButton>
             )}
-            {!isOpen && (
+            {!isOpen && !deleteComment && (
               <IconContainer>
                 <Icon>
                   {" "}
@@ -269,7 +280,7 @@ const ActivityCard = ({ activity }) => {
               </IconContainer>
             )}
           </InfoContainer>
-          {!isOpen && (
+          {!isOpen && !deleteComment && (
             <DivIconBottom>
               <LikeWrapper onClick={handleClick}>
                 <LikeContainer hasBeenLiked={hasBeenLiked}>
@@ -294,14 +305,30 @@ const ActivityCard = ({ activity }) => {
     </>
   );
 };
-
+const DeleteText = styled.div`
+position:relative;
+top:40px;
+font-size:25px;
+`;
 const DeleteWrapper = styled.div``;
 
 const DeleteButtonWrapper = styled.div``;
 const DeleteBtn = styled.button`
-    position:relative;
-    left:100px;
-    top:200px;
+  position: relative;
+  left: 10px;
+  margin-right:10px;
+  top: 200px;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #c83349;
+  border: none;
+  &:hover {
+    filter: brightness(85%);
+  }
+
 `;
 
 const TitleModify = styled.div`

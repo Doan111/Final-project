@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Link, useLinkClickHandler } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import { FiLinkedin, FiPlusCircle } from "react-icons/fi";
+import { FiPlusCircle } from "react-icons/fi";
 
 const Header = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -11,14 +11,20 @@ const Header = () => {
     <div>
       <Wrapper>
         <Title to="/profile">Burn</Title>
-        {isAuthenticated &&  <InputSearch type="text"id="search" name="search" placeholder="search for a user" />}
+        {isAuthenticated && (
+          <InputSearch
+            type="text"
+            id="search"
+            name="search"
+            placeholder="search for a user"
+          />
+        )}
         <Nav>
           <NavLink>
             {!isAuthenticated ? (
               <LogInButton />
             ) : (
               <>
-                 
                 <ProfilePic src={user.picture} alt={user.name} />{" "}
                 <Icon to="/activity">
                   <FiPlusCircle style={{ fontSize: "34px" }} />
@@ -33,14 +39,14 @@ const Header = () => {
     </div>
   );
 };
-  const InputSearch = styled.input`
-  text-align:center;
-  border-radius:50px;
-  margin-top:8px;
-  height:30px;
-  position:relative;
-  right:420px;
-  `;
+const InputSearch = styled.input`
+  text-align: center;
+  border-radius: 50px;
+  margin-top: 8px;
+  height: 30px;
+  position: relative;
+  right: 420px;
+`;
 const Upload = styled.span`
   border: 1px solid black;
   display: none;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Error from "./Error";
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   FaRunning,
   FaSwimmer,
@@ -49,7 +49,6 @@ const ActivityCard = ({ activity }) => {
       .then((data) => {
         console.log("here", data);
         if (data.status === 200) {
-          // window alert dont appear and page dont automatically refresh
           setDeleted(!deleted);
           window.alert("Deleted!");
         }

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 const Homepage = () => {
   const navigate = useNavigate();
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   {
     if (isAuthenticated) {
       navigate("/profile");
@@ -67,7 +67,7 @@ const Information = styled.div`
   width: 400px;
   height: 600px;
   background-color: white;
-  /* box-shadow: -1px 0px 11px 2px ; */
+
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
@@ -89,7 +89,7 @@ const Container = styled.div`
   margin-top: 0;
   position: relative;
   top: 0px;
-  /* z-index: -50; */
+  
 `;
 
 export default Homepage;

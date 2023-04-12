@@ -3,7 +3,7 @@ import Error from "./Error";
 
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRunning, FaSwimmer, FaBiking } from "react-icons/fa";
 const ProfileCard = () => {
   const {

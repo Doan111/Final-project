@@ -22,7 +22,7 @@ express()
   .use(morgan("tiny"))
   .use(express.json())
 
-  // routes for activities(all working)
+  
   // get all activites from database
   .get("/api/get-activities", getActivities)
   // get a single activity based on it's unique id

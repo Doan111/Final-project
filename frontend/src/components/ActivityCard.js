@@ -28,7 +28,6 @@ const ActivityCard = ({ activity }) => {
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
 
   const {
-    activities,
     user,
     isAuthenticated,
     deleted,

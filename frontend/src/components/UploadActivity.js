@@ -37,7 +37,7 @@ const UploadActivity = () => {
         console.log(data.data);
 
         setDeleted(!deleted);
-        navigate("/profile", { state: { isAuthenticated } });
+        navigate("/profile");
       })
       .catch((error) => {
         window.alert(error);

@@ -174,7 +174,6 @@ const deleteAllActivities = async (request, response) => {
     return response
       .status(502)
       .json({ status: 502, message: "Nothing was deleted" });
-    console.log(error.stack);
   }
 };
 

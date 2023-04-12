@@ -28,9 +28,6 @@ const Homepage = () => {
             </Text2>
             <Text3>Already a member?</Text3>
             <LogInButton />
-            {/* <Text3>
-              If not, click here to <BorderBottom>sign up!</BorderBottom>
-            </Text3> */}
           </Information>
         </Wrapper>
       </Container>
@@ -89,7 +86,6 @@ const Container = styled.div`
   margin-top: 0;
   position: relative;
   top: 0px;
-  
 `;
 
 export default Homepage;

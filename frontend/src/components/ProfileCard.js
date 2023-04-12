@@ -20,7 +20,7 @@ const ProfileCard = () => {
   const handleGoal = (event) => {
     setGoaNum(event.target.value);
   };
-  // code to delete all activities
+
   const handleClick = () => {
     fetch(`/api/delete-all-activities`, {
       method: "DELETE",
@@ -39,10 +39,6 @@ const ProfileCard = () => {
     setShowNotice(false);
   };
 
-  // const distanceBike = specificActivities.filter((item) => {
-  //   return item.unit === "meters";
-  // });
-  // console.log(distanceBike);
 
   const bikeNum = specificActivities.filter((item) => {
     return item.sport === "bike";
@@ -55,16 +51,8 @@ const ProfileCard = () => {
   const swimNum = specificActivities.filter((item) => {
     return item.sport === "swim";
   });
-  // verify  line 47 of profileCard(functions)
-  // verify how to delete with automatic refresh with are you sure you want to delete
-  // when a user post an activity it goes to the profilepage
-  // work on commment section
-  // link user to mongoDb and add search input to search for users
-  // work on activity detail page?
-  // work on reset button if clicked all activities will be deleted.
   let actLeft = goalNum - specificActivities.length;
 
-  const Number = 5;
   return (
     <>
       {isAuthenticated ? (

@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import Error from "./Error";
+
 import { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useEffect, useState } from "react";
 import { FaRunning, FaSwimmer, FaBiking } from "react-icons/fa";
 const ProfileCard = () => {
-  const { user, isAuthenticated, specificActivities, activities } =
-    useContext(CurrentUserContext);
+  const {
+    user,
+    isAuthenticated,
+    specificActivities,
+    activities,
+    deleted,
+    setDeleted,
+  } = useContext(CurrentUserContext);
 
   const [goalNum, setGoaNum] = useState(0);
   const [showNotice, setShowNotice] = useState(false);
@@ -15,10 +22,17 @@ const ProfileCard = () => {
   };
   // code to delete all activities
   const handleClick = () => {
-    fetch(`/api/delete-all-activities`, { method: "DELETE" })
+    fetch(`/api/delete-all-activities`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status == 204) {
+        if (data.status === 200) {
+          setDeleted(!deleted);
           window.alert("All activities were deleted!");
         }
       });
@@ -86,36 +100,38 @@ const ProfileCard = () => {
                 )}
               </Sucess>
             </Div>
-                { !showNotice && 
-            <SportDivider>
-              <SubTitle>Activities per sport</SubTitle>
-              <SportWrapper>
-                <Icon>
-                  <FaRunning style={{ fontSize: "24px" }} />
-                  {runNum.length}
-                </Icon>
+            {!showNotice && (
+              <SportDivider>
+                <SubTitle>Activities per sport</SubTitle>
+                <SportWrapper>
+                  <Icon>
+                    <FaRunning style={{ fontSize: "24px" }} />
+                    {runNum.length}
+                  </Icon>
 
-                <Icon>
-                  <FaBiking style={{ fontSize: "24px" }} />
-                  {bikeNum.length}
-                </Icon>
+                  <Icon>
+                    <FaBiking style={{ fontSize: "24px" }} />
+                    {bikeNum.length}
+                  </Icon>
 
-                <Icon>
-                  {" "}
-                  <FaSwimmer style={{ fontSize: "24px" }} />
-                  {swimNum.length}
-                </Icon>
-              </SportWrapper>
-            </SportDivider>}
-                  {! showNotice &&
-            <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>}
+                  <Icon>
+                    {" "}
+                    <FaSwimmer style={{ fontSize: "24px" }} />
+                    {swimNum.length}
+                  </Icon>
+                </SportWrapper>
+              </SportDivider>
+            )}
+            {!showNotice && (
+              <Reset onClick={() => setShowNotice(true)}>Reset goal</Reset>
+            )}
 
             {showNotice && (
               <WrapperNotice>
                 <GoalComplete>
                   {" "}
-                  Are you sure you want to delete all your activities and reset your current
-                  goal?
+                  Are you sure you want to delete all your activities and reset
+                  your current goal?
                 </GoalComplete>
                 <ButtonNotice onClick={handleClick}>Yes</ButtonNotice>
                 <ButtonNotice onClick={() => setShowNotice(false)}>
@@ -133,8 +149,8 @@ const ProfileCard = () => {
 };
 
 const ButtonNotice = styled.button`
-  margin-left:3px;
-   width: 100px;
+  margin-left: 3px;
+  width: 100px;
   text-decoration: none;
   color: white;
   border-radius: 10px;
@@ -145,9 +161,7 @@ const ButtonNotice = styled.button`
     filter: brightness(85%);
   }
 `;
-const WrapperNotice = styled.div`
- 
-`;
+const WrapperNotice = styled.div``;
 
 const Icon = styled.div``;
 const SubTitle = styled.div`

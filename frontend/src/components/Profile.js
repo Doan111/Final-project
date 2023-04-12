@@ -1,10 +1,16 @@
-import styled from "styled-components";
 import ProfileCard from "./ProfileCard";
 import { CurrentUserContext } from "./CurrentUserContext";
 import ActivityCard from "./ActivityCard";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+
+import { useLocation } from "react-router-dom";
 const Profile = () => {
-  const { activities, specificActivities } = useContext(CurrentUserContext);
+  const [updateDelete, setUpDateDelete] = useState(false);
+  useEffect(() => {}, [updateDelete]);
+  const { user, activities, specificActivities } =
+    useContext(CurrentUserContext);
+  const location = useLocation();
+  const isAuthenticated = location?.state?.isAuthenticated;
   return (
     <>
       <ProfileCard />

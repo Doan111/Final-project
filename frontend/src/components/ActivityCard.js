@@ -26,6 +26,7 @@ const ActivityCard = ({ activity }) => {
   });
   const [like, setLikes] = useState(0);
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
+
   const {
     activities,
     user,
@@ -37,11 +38,19 @@ const ActivityCard = ({ activity }) => {
   } = useContext(CurrentUserContext);
 
   const handleDelete = (id) => {
-    fetch(`/api/delete-activity/${id}`, { method: "DELETE" })
+    fetch(`/api/delete-activity/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status == 204) {
+        console.log("here", data);
+        if (data.status === 200) {
           // window alert dont appear and page dont automatically refresh
+          setDeleted(!deleted);
           window.alert("Deleted!");
         }
       });
@@ -306,9 +315,9 @@ const ActivityCard = ({ activity }) => {
   );
 };
 const DeleteText = styled.div`
-position:relative;
-top:40px;
-font-size:25px;
+  position: relative;
+  top: 40px;
+  font-size: 25px;
 `;
 const DeleteWrapper = styled.div``;
 
@@ -316,7 +325,7 @@ const DeleteButtonWrapper = styled.div``;
 const DeleteBtn = styled.button`
   position: relative;
   left: 10px;
-  margin-right:10px;
+  margin-right: 10px;
   top: 200px;
   width: 100px;
   text-decoration: none;
@@ -328,7 +337,6 @@ const DeleteBtn = styled.button`
   &:hover {
     filter: brightness(85%);
   }
-
 `;
 
 const TitleModify = styled.div`

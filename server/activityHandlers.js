@@ -137,27 +137,24 @@ const addActivity = async (request, response) => {
 };
 
 // delete an activity based on param
-const deleteActivity = async (request, response) => {
+const deleteActivity = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  const activity = request.params.activity;
+  const activity = req.params.activity;
   try {
     await client.connect();
     const db = client.db("Finalproject");
     const result = await db
       .collection("Activities")
       .deleteOne({ _id: activity });
-    client.close();
-    if (!result.deletedCount) {
-      return response
-        .status(502)
-        .json({ status: 502, message: "Nothing was deleted" });
-    } else {
-      return response
-        .status(204)
-        .json({ status: 204, message: "The delete was successful" });
-    }
+
+    return res
+      .status(200)
+      .json({ status: 200, message: "The delete was successful" });
   } catch (error) {
-    console.log(error.stack);
+    client.close();
+    return res
+      .status(502)
+      .json({ status: 502, message: "Nothing was deleted" });
   }
 };
 
@@ -167,18 +164,16 @@ const deleteAllActivities = async (request, response) => {
   try {
     await client.connect();
     const db = client.db("Finalproject");
-    const result = await db.collection("Activities").deleteMany({});
-    client.close();
-    if (!result.deletedCount) {
-      return response
-        .status(502)
-        .json({ status: 502, message: "Nothing was deleted" });
-    } else {
-      return response
-        .status(204)
-        .json({ status: 204, message: "The delete was successful" });
-    }
+    await db.collection("Activities").deleteMany({});
+
+    return response
+      .status(200)
+      .json({ status: 200, message: "The delete was successful" });
   } catch (error) {
+    client.close();
+    return response
+      .status(502)
+      .json({ status: 502, message: "Nothing was deleted" });
     console.log(error.stack);
   }
 };

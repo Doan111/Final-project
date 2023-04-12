@@ -8,7 +8,8 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import Error from "./Error";
 const UploadActivity = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useContext(CurrentUserContext);
+  const { user, isAuthenticated, deleted, setDeleted } =
+    useContext(CurrentUserContext);
   const [formData, setFormData] = useState({ unit: "kilometers" });
   const [distance, setDistance] = useState(["km", "meters", "miles"]);
   const [duration, setDuration] = useState([]);
@@ -21,7 +22,8 @@ const UploadActivity = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     fetch("/api/add-activity", {
       method: "POST",
       headers: {
@@ -33,13 +35,15 @@ const UploadActivity = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.data);
-        navigate("/profile");
+
+        setDeleted(!deleted);
+        navigate("/profile", { state: { isAuthenticated } });
       })
       .catch((error) => {
         window.alert(error);
       });
   };
-
+  // make sure the fetch happens before
   return (
     <>
       {isAuthenticated ? (

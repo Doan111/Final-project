@@ -13,28 +13,6 @@ const { v4: uuidv4 } = require("uuid");
 // authentification handlers
 
 //returns all the users from DB
-const getUsers = async (request, response) => {
-  const client = new MongoClient(MONGO_URI, option);
-  try {
-    await client.connect();
-    const db = client.db("Finalproject");
-    const users = await db.collection("Users").find().toArray();
-    if (users.length == 0) {
-      throw new Error(
-        "Something went wrong trying to retrieve users from the database"
-      );
-    }
-    client.close();
-    return response.status(200).json({
-      status: 200,
-      message: "Retrieved users from database successfully",
-      data: users,
-    });
-  } catch (error) {
-    client.close();
-    return response.status(404).json({ status: 404, error: error.message });
-  }
-};
 
 //returns a single user from the DB
 const getSingleUser = async (request, response) => {
@@ -237,7 +215,7 @@ module.exports = {
   getActivity,
   addActivity,
   getSingleUser,
-  getUsers,
+
   deleteActivity,
   updateActivity,
   getActivitiesByUser,

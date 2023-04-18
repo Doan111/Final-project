@@ -4,9 +4,13 @@ import LogInButton from "./LogInButton";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FiPlusCircle } from "react-icons/fi";
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 const Header = () => {
   const { user, isAuthenticated } = useAuth0();
+  const { users } = useContext(CurrentUserContext);
+  const [userInput, setUserInput] = useState("");
   return (
     <div>
       <Wrapper>
@@ -17,8 +21,21 @@ const Header = () => {
             id="search"
             name="search"
             placeholder="search for a user"
+            onChange={(e) => {
+              setUserInput(e.target.value.toLowerCase());
+            }}
           />
         )}
+        {userInput.length > 1 &&
+          users.map((item) => {
+            if (item.nickname.includes(userInput)) {
+              return (
+                <div>
+                  <p>{item.nickname}</p>
+                </div>
+              );
+            }
+          })}
         <Nav>
           <NavLink>
             {!isAuthenticated ? (

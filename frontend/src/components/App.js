@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/user-profile/:nickname" element={<Profile />} />
           <Route path="/activity" element={<UploadActivity />} />
         </Routes>
       </BrowserRouter>

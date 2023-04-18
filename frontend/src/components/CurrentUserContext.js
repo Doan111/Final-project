@@ -8,7 +8,16 @@ export const CurrentUserProvider = ({ children }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [specificActivities, setSpecificActivities] = useState([]);
   const [deleted, setDeleted] = useState(false);
-  // all activities in the data base could be used for a homepage
+  const [users, setUsers] = useState([]);
+  // all activities in the data base could be used for a homepage^
+
+  useEffect(() => {
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data.data);
+      });
+  }, []);
   useEffect(() => {
     fetch("/api/get-activities")
       .then((res) => res.json())
@@ -22,6 +31,15 @@ export const CurrentUserProvider = ({ children }) => {
   // all activities for a single user that will be used for a profile page
   useEffect(() => {
     if (isAuthenticated) {
+      fetch("/api/users", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
       fetch(`/api/get-activities/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
@@ -37,7 +55,7 @@ export const CurrentUserProvider = ({ children }) => {
     <CurrentUserContext.Provider
       value={{
         user,
-
+        users,
         isAuthenticated,
         activities,
         setActivities,

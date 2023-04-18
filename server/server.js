@@ -6,13 +6,15 @@ const {
   getActivities,
   getActivity,
   getSingleUser,
-  getUsers,
+
   addActivity,
   deleteActivity,
   updateActivity,
   getActivitiesByUser,
   deleteAllActivities,
 } = require("./activityHandlers");
+
+const { addUsers, getUsers } = require("./UserHandlers");
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -22,7 +24,6 @@ express()
   .use(morgan("tiny"))
   .use(express.json())
 
-  
   // get all activites from database
   .get("/api/get-activities", getActivities)
   // get a single activity based on it's unique id
@@ -38,8 +39,10 @@ express()
   // get all activities from a single user
   .get("/api/get-activities/:email", getActivitiesByUser)
   // routes for users
-  .get("/api/users", getUsers)
+
   .get(`/api/user/:userId`, getSingleUser)
+  .post("/api/users", addUsers)
+  .get("/api/users", getUsers)
 
   .get("*", (req, res) => {
     res.status(404).json({

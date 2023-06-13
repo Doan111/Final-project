@@ -1,2 +1,2 @@
-﻿# Final project
+﻿# Activity tracker
  
